@@ -1,5 +1,8 @@
 const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
+const SALT_ROUNDS = 6
 
 
 module.exports = {
@@ -14,15 +17,13 @@ async function signup(req, res) {
             username: req.body.username, 
             email: req.body.email, 
             password: hashedPass
-        });
-        console.log("here i am")
+        })
         // creating a jwt: 
         // the first parameter specifies what to put into the token (in this case, the user document)
         // the second parameter is a "secret" code. This lets the server verify if an incoming jwt is legit or not.
         const token = jwt.sign({ user }, process.env.SECRET,{ expiresIn: '24h' })
         res.status(200).json(token) // send it to the frontend
     } catch (err) {
-        console.log("here i am")
         res.status(400).json(err)
     }
 }
