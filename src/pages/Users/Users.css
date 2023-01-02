@@ -1,0 +1,49 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0px !important;
+}
+
+.navbar {
+margin-bottom: 0px !important;
+}
+
+.discover-page {
+padding: 5vmin 5vmin 5vmin 5vmin;
+border-radius: 1vmin;
+}
+
+.discover {
+padding-left: 5vmin;
+}
+
+.card-spacing {
+margin-bottom: 12px;
+width: 18rem;
+}
+
+.show {
+display: block;
+}
+
+.hidden {
+display: none;
+}
+
+.discover-title {
+padding: 17vmin 5vmin 0vmin 10vmin;
+margin: 0 0 0 0;
+}
+
+.discover-subtitle {
+padding-left: 10vmin;
+}
+
+.card-spacing {
+padding: 0;
+margin: 12px 12px 12px 12px;
+}
+
+.logo-link {
+text-decoration: 'none';
+}

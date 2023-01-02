@@ -16,7 +16,17 @@ const userSchema = new Schema({
         trim: true,
         minLength: 8,
         required: true
-    }
+    },
+    description: {
+        type: String,
+        trim: true,
+        maxLength: 70
+    },
+    paymentInfo: {type: String},
+    publisherAgreement: {
+        type: Boolean, 
+        default: false
+    },
 }, {
     timestamps: true,
     toJSON: {

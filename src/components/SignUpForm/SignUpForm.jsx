@@ -10,17 +10,17 @@ export default class SignUpForm extends Component {
         password: "",
         confirm: "",
         error: "",
-    };
+    }
 
     handleChange = (evt) => {
         this.setState({
         [evt.target.name]: evt.target.value,
         error: "",
-        });
-    };
+        })
+    }
 
     handleSubmit = async (evt) => {
-        evt.preventDefault();
+        evt.preventDefault()
         try {
         const fetchResponse = await fetch('/api/users/signup', {
             method: 'POST',
@@ -37,13 +37,13 @@ export default class SignUpForm extends Component {
         const userDoc = JSON.parse(atob(token.split('.')[1])).user
         this.props.setUserInState(userDoc)
         } catch (err) {
-        this.setState({ error: "Sign Up Failed - Try Again" });
+        this.setState({ error: "Sign Up Failed - Try Again" })
         }
     }
 
 
     render() {
-        const disable = this.state.password !== this.state.confirm;
+        const disable = this.state.password !== this.state.confirm
         return (
           <div className="container">
           <div className="row">
