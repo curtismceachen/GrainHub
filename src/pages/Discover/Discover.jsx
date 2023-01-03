@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 // import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import React, {useEffect, useState} from "react";
-import './Users.css';
+import './Discover.css';
 
 
 export default function Discover(props) {
@@ -15,7 +15,7 @@ export default function Discover(props) {
     }
 
     let getPublishers = async () => {
-        await fetch("/api/users")
+        await fetch("/api/publishers")
           .then(res => res.json())
           .then(data => setPublishers(data))
     }
@@ -45,19 +45,19 @@ export default function Discover(props) {
             <div className="discover secondary-font">
               <div className="align-items-start discover row row-cols-3">
                 {publishers.map((p) => (
-                <div className="card card-spacing">
+                  <div className="card card-spacing">
                   {/* <img className="card-img-top image-size" src={s.photoUrl} alt="spot picture"></img> */}
                   <div className="card-body">
-                    <h5 className="card-title"><b>{p.username}</b></h5>
-                    <div className="card-text"> {p.description}</div>
-                    <button className="btn btn-primary btn-sm update-button" onClick={() => handleSeeMore(p._id)}>See more</button>
-                    {/* <button className="btn btn-danger btn-sm delete-button" onClick={() => handleDelete(s._id)}>Delete</button> */}
-                    <div className={!isActive[p._id] ? "hidden" : null}>
+                      <h5 className="card-title"><b>{p.username}</b></h5>
+                      <div className="card-text"> {p.description}</div>
+                      <button className="btn btn-primary btn-sm update-button" onClick={() => handleSeeMore(p._id)}>See more</button>
+                      {/* <button className="btn btn-danger btn-sm delete-button" onClick={() => handleDelete(s._id)}>Delete</button> */}
+                      <div className={!isActive[p._id] ? "hidden" : null}>
                       {/* <UpdateSpot spot={s} refresh={getSpots}/> */}
                       <div>Here is the rest</div>
-                    </div>
+                      </div>
                   </div>
-                </div>
+                  </div>
                 ))}
               </div>
             </div>

@@ -6,7 +6,5 @@ const usersCtrl = require('../../controllers/api/users')
 router.post('/signup', usersCtrl.signup)
 // login
 router.post('/login', usersCtrl.login)
-// GET users
-router.get('/', usersCtrl.discover)
 
 module.exports = router

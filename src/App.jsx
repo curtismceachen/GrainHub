@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css';
-import Users from './pages/Users/Users'
+import Discover from './pages/Discover/Discover'
 import Auth from './pages/Auth/Auth'
 
 
@@ -35,7 +35,7 @@ export default class App extends Component {
       <div className="App">
         { this.state.user ? 
           <Routes>
-            <Route path='/' element={<Users setUserInState={this.setUserInState}/>} />
+            <Route path='/' element={<Discover setUserInState={this.setUserInState}/>} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
           :

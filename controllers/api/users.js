@@ -8,7 +8,6 @@ const SALT_ROUNDS = 6
 module.exports = {
     signup,
     login,
-    discover
 }
 
 async function signup(req, res) {
@@ -38,9 +37,4 @@ async function login(req, res) {
     } catch (error) {
         res.status(400).json('Bad Credentials')
     }
-}
-
-async function discover(req, res) {
-    let publishers = await User.find({})
-    res.json(publishers)
 }
