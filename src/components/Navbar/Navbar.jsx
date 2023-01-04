@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UserLogout from '../UserLogout/UserLogout'
-import { Link } from "react-router-dom";
+import Auth from '../../pages/Auth/Auth'
+import './Navbar.css'
+import { Link } from 'react-router-dom'
 
 
 export default function Navbar(props) {
+
+    const [sidebar, setSidebar] = useState(false)
+
+    const showSidebar = () => setSidebar(!sidebar)
 
     return (
         <main>
@@ -17,7 +23,13 @@ export default function Navbar(props) {
             {props.user ?
               <UserLogout setUserInState={props.setUserInState}/>
                 :
-              <button className="btn btn-light">Log in</button>
+              <div>
+                <button className="btn btn-light" onClick={showSidebar}>Log in</button>
+                <div className={sidebar ? 'auth-panel active' : 'auth-panel'}>
+                  <div onClick={showSidebar}>X</div>
+                  <Auth setUserInState={props.setUserInState}/>
+                </div>
+              </div>
             }
           </nav>
         </main>

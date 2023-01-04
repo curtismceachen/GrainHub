@@ -33,15 +33,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* { this.state.user ?  */}
-          <Navbar user={this.state.user} setUserInState={this.setUserInState}/>
-          <Routes>
-            <Route path='/' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>} />
-            <Route path='*' element={<Navigate to='/' replace />} />
-          </Routes>
-          {/* : */}
-          <Auth setUserInState={this.setUserInState}/>
-        {/* } */}
+        <Navbar user={this.state.user} setUserInState={this.setUserInState}/>
+        <Routes>
+          <Route path='/' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>} />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
       </div>
     )
   }

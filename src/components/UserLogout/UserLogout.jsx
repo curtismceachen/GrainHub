@@ -11,10 +11,7 @@ class UserLogout extends React.Component {
   
     render() {
         return (
-          
-            <button className="btn btn-light" onClick={this.changeLoginStatus}>Log out</button>
-            // <button className="btn btn-light" onClick={this.changeLoginStatus}>Log out</button>
-            
+          <button className="btn btn-light" onClick={this.changeLoginStatus}>Log out</button>
         )
     }
 }

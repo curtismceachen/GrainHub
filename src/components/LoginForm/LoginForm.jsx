@@ -25,16 +25,16 @@ export default class LoginForm extends Component {
       })
 
       if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-
+      
       let token = await fetchResponse.json()
       localStorage.setItem('token', token);
 
       const userDoc = JSON.parse(atob(token.split('.')[1])).user;
       this.props.setUserInState(userDoc)
     } catch (err) {
-      this.setState({ error: "Sign Up Failed - Try Again" });
+      this.setState({ error: "Log In Failed - Try Again" });
     }
-  };
+  }
 
   render() {
     return (
