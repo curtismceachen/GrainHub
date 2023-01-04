@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css';
 import Discover from './pages/Discover/Discover'
 import Auth from './pages/Auth/Auth'
-
+import Navbar from './components/Navbar/Navbar';
 
 
 export default class App extends Component {
@@ -33,14 +33,15 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        { this.state.user ? 
+        {/* { this.state.user ?  */}
+          <Navbar user={this.state.user} setUserInState={this.setUserInState}/>
           <Routes>
-            <Route path='/' element={<Discover setUserInState={this.setUserInState}/>} />
+            <Route path='/' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
-          :
+          {/* : */}
           <Auth setUserInState={this.setUserInState}/>
-        }
+        {/* } */}
       </div>
     )
   }

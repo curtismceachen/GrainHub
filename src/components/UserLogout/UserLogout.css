@@ -1,0 +1,6 @@
+.logout-position {
+    display: flex;
+    justify-content: right;
+    flex-direction: row-reverse;
+    float: right;
+}

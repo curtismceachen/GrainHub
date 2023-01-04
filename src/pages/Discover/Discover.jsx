@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// import UserLogOut from '../../components/UserLogOut/UserLogOut';
+import Navbar from '../../components/Navbar/Navbar';
 import React, {useEffect, useState} from "react";
 import './Discover.css';
 
@@ -29,16 +29,16 @@ export default function Discover(props) {
     
     return (
         <main>
-          <nav className="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded fixed-top justify-content-between">
+          {/* <Navbar user={props.user} setUserInState={props.setUserInState}/> */}
+          {/* <nav className="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded fixed-top justify-content-between">
             <div className="navbar-brand theme-font">Investing Ideas</div>
             <div className="theme-font">
               <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                   Become A Publisher
               </Link>
             </div>
-            <div>Logout</div>
-            {/* <UserLogOut setUserInState={props.setUserInState}/> */}
-          </nav>
+            <UserLogout setUserInState={props.setUserInState}/>
+          </nav> */}
           <div className="spots-page spot-background-image">
             <h1 className="discover-title theme-font">Discover</h1>
             <div className="discover-subtitle secondary-font">Top Publishers</div>
@@ -53,8 +53,8 @@ export default function Discover(props) {
                       <button className="btn btn-primary btn-sm update-button" onClick={() => handleSeeMore(p._id)}>See more</button>
                       {/* <button className="btn btn-danger btn-sm delete-button" onClick={() => handleDelete(s._id)}>Delete</button> */}
                       <div className={!isActive[p._id] ? "hidden" : null}>
-                      {/* <UpdateSpot spot={s} refresh={getSpots}/> */}
-                      <div>Here is the rest</div>
+                        {/* <UpdateSpot spot={s} refresh={getSpots}/> */}
+                        <div>Here is the rest</div>
                       </div>
                   </div>
                   </div>
