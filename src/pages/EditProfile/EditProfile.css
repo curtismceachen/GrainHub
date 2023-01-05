@@ -1,0 +1,23 @@
+.editProfileForm {
+  padding: 17vmin 5vmin 5vmin 5vmin;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.username-update {
+  margin-top: 10px;
+}
+
+.description-update {
+  margin-bottom: 10px;
+}
+
+.paymentInfo {
+  margin-bottom: 10px;
+}
+
+.publisherAgreement {
+  margin-bottom: 10px;
+}

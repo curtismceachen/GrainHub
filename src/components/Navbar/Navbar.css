@@ -15,3 +15,11 @@
   right: 0;
   transition: 350ms;
 }
+
+.nav {
+  margin-bottom: 0px !important;
+}
+
+.navbar {
+  margin-bottom: 0px !important;
+}

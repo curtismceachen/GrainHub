@@ -1,18 +1,20 @@
-import { Component } from 'react';
+import { Component } from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css';
 import Discover from './pages/Discover/Discover'
 import Auth from './pages/Auth/Auth'
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar/Navbar'
+import EditProfile from './pages/EditProfile/EditProfile'
 
 
 export default class App extends Component {
   
   state = {
-    user: null
+    user: false
   }
 
   setUserInState = (incomingUserData) => {
+    console.log('incoming userdata: ' + incomingUserData)
     this.setState({ user: incomingUserData })
   }
 
@@ -24,6 +26,7 @@ export default class App extends Component {
           localStorage.removeItem('token')
           token = null
         } else {
+          console.log('payload.user: ' + JSON.stringify(payload.user))
           this.setState({ user: payload.user })
         }
     }
@@ -35,7 +38,8 @@ export default class App extends Component {
       <div className="App">
         <Navbar user={this.state.user} setUserInState={this.setUserInState}/>
         <Routes>
-          <Route path='/' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>} />
+          <Route path='/users/editprofile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>} />
+          <Route path='/' element={<Discover username={this.state.username} setUserInState={this.setUserInState}/>} />
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
       </div>

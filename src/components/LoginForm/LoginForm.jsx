@@ -30,6 +30,7 @@ export default class LoginForm extends Component {
       localStorage.setItem('token', token);
 
       const userDoc = JSON.parse(atob(token.split('.')[1])).user;
+      console.log("userDoc: " + userDoc)
       this.props.setUserInState(userDoc)
     } catch (err) {
       this.setState({ error: "Log In Failed - Try Again" });

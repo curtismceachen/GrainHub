@@ -20,7 +20,8 @@ const userSchema = new Schema({
     description: {
         type: String,
         trim: true,
-        maxLength: 70
+        maxLength: 70,
+        default: '',
     },
     paymentInfo: {type: String},
     publisherAgreement: {

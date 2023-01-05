@@ -10,14 +10,15 @@ export default function Navbar(props) {
     const [sidebar, setSidebar] = useState(false)
 
     const showSidebar = () => setSidebar(!sidebar)
-
     return (
-        <main>
+      <main>
           <nav className="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded fixed-top justify-content-between">
-            <div className="navbar-brand theme-font">Investing Ideas</div>
+            <Link to='/' style={{color: 'inherit', textDecoration: 'inherit'}}>
+              <div className="navbar-brand theme-font">Investing Ideas</div>
+            </Link>
             <div className="theme-font">
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                Become A Publisher
+            <Link to='/users/editprofile' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+              Become A Publisher
             </Link>
             </div>
             {props.user ?

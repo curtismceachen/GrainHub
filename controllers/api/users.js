@@ -8,6 +8,7 @@ const SALT_ROUNDS = 6
 module.exports = {
     signup,
     login,
+    editProfile
 }
 
 async function signup(req, res) {
@@ -37,4 +38,14 @@ async function login(req, res) {
     } catch (error) {
         res.status(400).json('Bad Credentials')
     }
+}
+
+async function editProfile(req, res) {
+    console.log('here is req.body.id: ' + req.body._id)
+    let user = await User.findByIdAndUpdate(req.body._id, {
+        description: req.body.description,
+        paymentInfo: req.body.paymentInfo,
+        publisherAgreement: req.body.publisherAgreement
+    })
+    res.json(user)
 }
