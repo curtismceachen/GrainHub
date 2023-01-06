@@ -13,14 +13,23 @@ export default function Navbar(props) {
     return (
       <main>
           <nav className="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded fixed-top justify-content-between">
+            <div className="navbar-brand theme-font">
             <Link to='/' style={{color: 'inherit', textDecoration: 'inherit'}}>
-              <div className="navbar-brand theme-font">Investing Ideas</div>
+              Investing Ideas
             </Link>
+            </div>
             <div className="theme-font">
             <Link to='/users/editprofile' style={{ color: 'inherit', textDecoration: 'inherit' }}>
               Become A Publisher
             </Link>
             </div>
+            { props.user.publisherAgreement &&
+              <div className='theme-font'>
+                <Link to='/' style={{color: 'inherit', textDecoration: 'inherit'}}>
+                  Post an Investing Idea
+                </Link>
+              </div>
+            }
             {props.user ?
               <UserLogout setUserInState={props.setUserInState}/>
                 :

@@ -11,25 +11,10 @@ export default class App extends Component {
   
   state = {
     user: false,
-    publishers: []
   }
-
-  // getPublishers = async () => {
-  //   await fetch("/api/publishers")
-  //     .then(res => res.json())
-  //     .then(data => setPublishers(data))
-  // }
-
-  // useEffect(() => {
-  //     (async() => {
-  //         await getPublishers()
-  //     })()
-  // },[])
-  
 
   setUserInState = (incomingUserData) => {
     console.log('incoming userdata: ' + incomingUserData)
-    // this.setState({ user: incomingUserData })
     this.setState({user: incomingUserData})
   }
 
