@@ -6,6 +6,6 @@ module.exports = {
 }
 
 async function discover(req, res) {
-    let publishers = await User.find({})
+    let publishers = await User.find({ 'paymentInfo': {$ne: ''}, 'publisherAgreement': true })
     res.json(publishers)
 }

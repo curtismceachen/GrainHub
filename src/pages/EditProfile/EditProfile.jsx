@@ -7,23 +7,26 @@ export default class EditProfile extends Component {
     
     state = {
         _id: '',
+        email: '',
         username: '',
         description: '',
         paymentInfo: '',
         publisherAgreement: false,
     }
 
-    // handleCheckboxChange = () => {
-    //     this.setState({publisherAgreement:(!this.state.publisherAgreement)})
-    // }
-
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    handleCBChange = (e) => {
+        this.setState({publisherAgreement:!this.state.publisherAgreement})
+    }
+    
     handleSubmit = async () => {
+        this.props.setUserInState(this.state)
         let body = {
             _id: this.state._id,
+            email: this.state.email,
             username: this.state.username,
             description: this.state.description,
             paymentInfo: this.state.paymentInfo,
@@ -37,13 +40,15 @@ export default class EditProfile extends Component {
             body: JSON.stringify(body)
         }
         await fetch('/api/users/editprofile', options)
+            // .then(this.props.setUserInState(this.state))
             .then(res => res.json())
     }
 
     componentDidMount() {
-        console.log('props.user._id: ' + this.props.user._id)
+        console.log('props.user.description: ' + this.props.user.description)
         this.setState({
             _id: this.props.user._id,
+            email: this.props.email,
             username: this.props.user.username,
             description: this.props.user.description,
             paymentInfo: this.props.user.paymentInfo,
@@ -56,6 +61,7 @@ export default class EditProfile extends Component {
         return (
           <form className='editProfileForm' onSubmit={this.handleSubmit}>
             <input type='hidden' value={this.state._id}></input>
+            <input type='hidden' value={this.state.email}></input>
             <div>
               <div className="form-group name-update">
                 <label className="inputUD"><span className="label"><b>Username</b></span></label>
@@ -72,7 +78,7 @@ export default class EditProfile extends Component {
               </div>
               <div className="form-group address-update">
                 <label className="inputUD"><span className="label"><b>Fake Publisher Agreement</b></span></label>
-                <input type="checkbox" name="publisherAgreement" onClick={()=>this.setState({publisherAgreement:!this.state.publisherAgreement})} value={this.state.publisherAgreement}></input>
+                <input type="checkbox" name="publisherAgreement" onClick={this.handleCBChange} value={this.state.publisherAgreement}></input>
               </div>
               <input type="submit" className="btn btn-success"></input>
             </div>

@@ -10,12 +10,27 @@ import EditProfile from './pages/EditProfile/EditProfile'
 export default class App extends Component {
   
   state = {
-    user: false
+    user: false,
+    publishers: []
   }
+
+  // getPublishers = async () => {
+  //   await fetch("/api/publishers")
+  //     .then(res => res.json())
+  //     .then(data => setPublishers(data))
+  // }
+
+  // useEffect(() => {
+  //     (async() => {
+  //         await getPublishers()
+  //     })()
+  // },[])
+  
 
   setUserInState = (incomingUserData) => {
     console.log('incoming userdata: ' + incomingUserData)
-    this.setState({ user: incomingUserData })
+    // this.setState({ user: incomingUserData })
+    this.setState({user: incomingUserData})
   }
 
   componentDidMount() {
@@ -39,7 +54,7 @@ export default class App extends Component {
         <Navbar user={this.state.user} setUserInState={this.setUserInState}/>
         <Routes>
           <Route path='/users/editprofile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>} />
-          <Route path='/' element={<Discover username={this.state.username} setUserInState={this.setUserInState}/>} />
+          <Route path='/' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>} />
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
       </div>
