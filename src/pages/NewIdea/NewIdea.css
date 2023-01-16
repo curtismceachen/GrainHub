@@ -1,0 +1,23 @@
+.newIdeaForm {
+  padding: 17vmin 5vmin 5vmin 5vmin;
+}
+
+.button {
+cursor: pointer;
+}
+
+.title {
+margin: 10px 0 10px 0;
+}
+
+.thesis {
+margin-bottom: 10px;
+}
+
+.ticker {
+margin-bottom: 10px;
+}
+
+.longOrShort {
+margin-bottom: 10px;
+}

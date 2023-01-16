@@ -15,7 +15,7 @@ export default function Discover(props) {
     }
 
     let getPublishers = async () => {
-        await fetch("/api/publishers")
+        await fetch("/api/publishers/discover")
           .then(res => res.json())
           .then(data => setPublishers(data))
     }
@@ -38,7 +38,9 @@ export default function Discover(props) {
                   <div className="card card-spacing">
                   {/* <img className="card-img-top image-size" src={s.photoUrl} alt="spot picture"></img> */}
                   <div className="card-body">
+                    <Link to={`/publishers/show/${p._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                       <h5 className="card-title"><b>{p.username}</b></h5>
+                    </Link>
                       <div className="card-text"> {p.description}</div>
                       <button className="btn btn-primary btn-sm update-button" onClick={() => handleSeeMore(p._id)}>See more</button>
                       {/* <button className="btn btn-danger btn-sm delete-button" onClick={() => handleDelete(s._id)}>Delete</button> */}

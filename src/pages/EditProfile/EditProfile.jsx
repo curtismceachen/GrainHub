@@ -23,7 +23,6 @@ export default class EditProfile extends Component {
     }
     
     handleSubmit = async () => {
-        this.props.setUserInState(this.state)
         let body = {
             _id: this.state._id,
             email: this.state.email,
@@ -42,6 +41,9 @@ export default class EditProfile extends Component {
         await fetch('/api/users/editprofile', options)
             // .then(this.props.setUserInState(this.state))
             .then(res => res.json())
+            .then(() => {
+                this.props.setUserInState(this.state)
+            })
     }
 
     componentDidMount() {
