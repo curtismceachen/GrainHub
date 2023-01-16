@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const ideaSchema = new Schema({
     title: {
         type: String,
-        maxlength: 20,
+        maxlength: 130,
         required: true
     },
     thesis: {
@@ -20,7 +20,8 @@ const ideaSchema = new Schema({
     },
     user: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'user'
+        ref: 'user',
+
     },
 })
 

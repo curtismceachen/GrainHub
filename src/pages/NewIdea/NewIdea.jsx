@@ -25,6 +25,7 @@ export default class NewSpot extends Component {
             thesis: this.state.thesis,
             ticker: this.state.ticker,
             longOrShort: this.state.longOrShort,
+            user: this.props.user
         }
 
         let options = {
@@ -77,6 +78,7 @@ export default class NewSpot extends Component {
                           <option value={this.longOrShort}>Short</option>
                         </select>
                       </div>
+                      <input hidden name='user'>{this.props.user.id}</input>
                       <input type='submit' className="btn btn-primary top-buffer-submit"></input>
                     </div>
                   </div>

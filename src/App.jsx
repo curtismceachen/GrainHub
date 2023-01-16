@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar'
 import EditProfile from './pages/EditProfile/EditProfile'
 import NewIdea from './pages/NewIdea/NewIdea'
 import PubProfile from './pages/PubProfile/PubProfile'
+import PubIdeas from './pages/PubIdeas/PubIdeas'
 
 
 export default class App extends Component {
@@ -43,6 +44,7 @@ export default class App extends Component {
           <Route path='/ideas/create' element={<NewIdea user={this.state.user} setUserInState={this.setUserInState}/>}/>
           <Route path='/users/editprofile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>} />
           <Route path='/publishers/show/:id' element={<PubProfile user={this.state.user}/>}/>
+          <Route path='/ideas/show/:id' element={<PubIdeas user={this.state.user}/>}/>
           <Route path='/' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>} />
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>

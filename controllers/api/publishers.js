@@ -12,7 +12,6 @@ async function discover(req, res) {
 }
 
 async function showPubProfile(req, res) {
-    console.log(req.params.id)
     let publisher = await User.findById(req.params.id)
     res.json(publisher)
 }
