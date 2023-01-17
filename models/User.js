@@ -28,6 +28,11 @@ const userSchema = new Schema({
         type: Boolean, 
         default: false
     },
+    subscriptions: [{
+        publisher_id: {
+            type: mongoose.Schema.Types.ObjectId,
+        },
+    }],
 }, {
     timestamps: true,
     toJSON: {

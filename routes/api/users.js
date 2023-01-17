@@ -9,4 +9,6 @@ router.post('/login', usersCtrl.login)
 // edit
 router.put('/editprofile', usersCtrl.editProfile)
 
+router.put('/addSubscription', usersCtrl.addSubscription)
+
 module.exports = router

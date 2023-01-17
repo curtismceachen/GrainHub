@@ -6,8 +6,10 @@ import './Discover.css';
 
 export default function Discover(props) {
     
-    const [isActive, setActive] = useState({});
-    const [publishers, setPublishers] = useState([]);
+    const [isActive, setActive] = useState({})
+    const [publishers, setPublishers] = useState([])
+    const [subscriptions, setSubscriptions] = useState([])
+
     const handleSeeMore = (id) => {
         let temp = {...isActive}
         temp[id] = !temp[id]
@@ -25,6 +27,20 @@ export default function Discover(props) {
             await getPublishers()
         })()
     },[])
+    
+    let handleSubscribe = async (id) => {
+      let body = {userId: props.user._id, pubId: id}
+      let options = {
+        method: 'Put', 
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      }
+      await fetch('/api/users/addSubscription', options)
+        .then(res => res.json())
+        // .then(data => setSubscriptions(data))
+    }
     
     
     return (
@@ -48,6 +64,7 @@ export default function Discover(props) {
                         {/* <UpdateSpot spot={s} refresh={getSpots}/> */}
                         <div>{p.description}</div>
                       </div>
+                      <button className="btn btn-success btn-sm" onClick={() => handleSubscribe(p._id)}>Subscribe</button>
                   </div>
                   </div>
                 ))}

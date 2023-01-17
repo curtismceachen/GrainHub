@@ -8,7 +8,8 @@ const SALT_ROUNDS = 6
 module.exports = {
     signup,
     login,
-    editProfile
+    editProfile,
+    addSubscription
 }
 
 async function signup(req, res) {
@@ -47,4 +48,13 @@ async function editProfile(req, res) {
         publisherAgreement: req.body.publisherAgreement
     })
     res.json(user)
+}
+
+async function addSubscription(req, res) {
+    let subscriptions = await User.findByIdAndUpdate(req.body.userId,
+        { $addToSet: 
+            { subscriptions: 
+                [{publisher_id: req.body.pubId}] }}
+    )
+    res.json(subscriptions)
 }
