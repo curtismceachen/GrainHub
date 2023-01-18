@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import Navbar from '../../components/Navbar/Navbar';
 import React, {useEffect, useState} from "react";
+import SubscribeButton from '../../components/SubscribeButton/SubscribeButton'
+import UnsubscribeButton from '../../components/UnsubscribeButton/UnsubscribeButton'
 import './Discover.css';
 
 
-export default function Discover(props) {
-    
+export default function Discover (props) {
+
     const [isActive, setActive] = useState({})
     const [publishers, setPublishers] = useState([])
     const [subscriptions, setSubscriptions] = useState([])
 
-    const handleSeeMore = (id) => {
+    let handleSeeMore = (id) => {
         let temp = {...isActive}
         temp[id] = !temp[id]
         setActive(temp)
@@ -36,36 +38,6 @@ export default function Discover(props) {
         })()
     },[])
     
-    let handleSubscribe = async (id) => {
-        let body = {userId: props.user._id, pubId: id}
-        let options = {
-            method: 'Put', 
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }
-        await fetch('/api/users/addSubscription', options)
-            .then(res => res.json())
-            .then(data => props.setUserInState(data))
-    }
-
-    let handleUnsubscribe = async (id) => {
-        let body = {userId: props.user._id, pubId: id}
-        let options = {
-            method: 'Put', 
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }
-        let response = await fetch('/api/users/removeSubscription', options)
-            let data = await response.json()
-            props.setUserInState(data)
-            // props.setUserInState(data))
-            // props.setUserInState(data)
-    }
-    
     
     return (
         <main>
@@ -87,9 +59,9 @@ export default function Discover(props) {
                       </div>
                       {props.user &&
                         props.user.subscriptions.some(s => s.publisherId === p._id) ?
-                          <button className="btn btn-success btn-sm" onClick={() => handleUnsubscribe(p._id)}>Unsubscribe</button>  
+                          <UnsubscribeButton user={props.user} publisher={p} setUserInState={props.setUserInState} />
                           :
-                          <button className="btn btn-success btn-sm" onClick={() => handleSubscribe(p._id)}>Subscribe</button>
+                          <SubscribeButton user={props.user} publisher={p} setUserInState={props.setUserInState}/>
                       }
                     </div>
                   </div>
