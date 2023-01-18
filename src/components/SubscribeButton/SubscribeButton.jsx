@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export default class SubscribeButton extends Component {
 
@@ -29,7 +30,9 @@ export default class SubscribeButton extends Component {
 
     render() {
         return (
+        <Link to='/discover'>
             <button className="btn btn-success btn-sm" onClick={() => this.handleSubscribe(this.props.publisher._id)}>Subscribe</button>
+        </Link>
         )
     }
 
