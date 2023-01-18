@@ -9,7 +9,8 @@ module.exports = {
     signup,
     login,
     editProfile,
-    addSubscription
+    addSubscription,
+    removeSubscription
 }
 
 async function signup(req, res) {
@@ -51,10 +52,18 @@ async function editProfile(req, res) {
 }
 
 async function addSubscription(req, res) {
-    let subscriptions = await User.findByIdAndUpdate(req.body.userId,
+    let user = await User.findByIdAndUpdate(req.body.userId,
         { $addToSet: 
             { subscriptions: 
-                [{publisher_id: req.body.pubId}] }}
+                [{publisherId: req.body.pubId}] }}
     )
-    res.json(subscriptions)
+    console.log(user)
+    res.json(user)
+}
+
+async function removeSubscription(req, res) {
+    let user = await User.findById(req.body.userId)
+    user.subscriptions.pull({publisherId: req.body.pubId})
+    user.save()
+    res.json(user)
 }

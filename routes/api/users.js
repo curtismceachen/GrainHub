@@ -11,4 +11,6 @@ router.put('/editprofile', usersCtrl.editProfile)
 
 router.put('/addSubscription', usersCtrl.addSubscription)
 
+router.put('/removeSubscription', usersCtrl.removeSubscription)
+
 module.exports = router

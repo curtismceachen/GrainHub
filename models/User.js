@@ -29,7 +29,7 @@ const userSchema = new Schema({
         default: false
     },
     subscriptions: [{
-        publisher_id: {
+        publisherId: {
             type: mongoose.Schema.Types.ObjectId,
         },
     }],
