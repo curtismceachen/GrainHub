@@ -10,7 +10,7 @@ export default function Discover (props) {
     
     const [isActive, setActive] = useState({})
     const [publishers, setPublishers] = useState([])
-    const [subscriptions, setSubscriptions] = useState([])
+    // const [subscriptions, setSubscriptions] = useState([])
 
     let handleSeeMore = (id) => {
         let temp = {...isActive}
@@ -57,12 +57,12 @@ export default function Discover (props) {
                       <div className={!isActive[p._id] ? "hidden" : null}>
                         <div>{p.description}</div>
                       </div>
-                      {props.user &&
+                      {props.user && (
                         props.user.subscriptions.some(s => s.publisherId === p._id) ?
                           <UnsubscribeButton user={props.user} publisher={p} setUserInState={props.setUserInState} />
                           :
                           <SubscribeButton user={props.user} publisher={p} setUserInState={props.setUserInState}/>
-                      }
+                      )}
                     </div>
                   </div>
                 ))}

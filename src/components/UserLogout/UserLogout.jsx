@@ -6,8 +6,8 @@ import { redirect, Link } from 'react-router-dom'
 class UserLogout extends React.Component {
     
     changeLoginStatus = () => {
-        localStorage.removeItem('token')
         this.props.setUserInState(false)
+        localStorage.removeItem('token')
         this.props.showAuthSidebar(false)
     }
   
