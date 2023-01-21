@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from '../../components/Navbar/Navbar';
 import React, {useEffect, useState} from "react";
 import {useParams} from 'react-router'
+import DOMPurify from 'dompurify'
 import './PubIdeas.css';
 
 
@@ -22,7 +23,10 @@ export default function Discover(props) {
         })()
     }, [])
     
-    
+    let sanitizedData = (data) => ({
+      __html: DOMPurify.sanitize(data)
+    })
+
     return (
         <main>
           <div className="spots-page spot-background-image">
@@ -35,9 +39,9 @@ export default function Discover(props) {
                 <div className="card card-spacing">
                   <div className="card-body">
                     <h5 className="card-title"><b>{i.title}</b></h5>
-                    <div className="card-subtitle"> {i.ticker}</div>
-                    <div className="card-subtitle"> {i.longOrShort}</div>
-                    <div className="card-text"> {i.thesis}</div>
+                    <div className="card-subtitle">{i.ticker}</div>
+                    <div className="card-subtitle">{i.longOrShort}</div>
+                    <div className="card-text" dangerouslySetInnerHTML={sanitizedData(i.editorState)}></div>
                   </div>
                 </div>
                 ))}

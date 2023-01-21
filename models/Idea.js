@@ -18,6 +18,9 @@ const ideaSchema = new Schema({
     longOrShort: {
         type: String,
     },
+    editorState: {
+        type: String,
+    },
     user: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user',

@@ -1,28 +1,31 @@
 import { Component } from 'react'
-import { Link } from 'react-router-dom'
-import UserLogout from '../../components/UserLogout/UserLogout'
 import React from 'react'
 import './NewIdea.css';
+import { Editor } from '@tinymce/tinymce-react'
 
 
 export default class NewSpot extends Component {
     
     state = {
         title: '',
-        thesis: '',
+        editorState: null,
         ticker: '',
         longOrShort: '',
     }
     
+    
+    onEditorChange = (editorState) => {
+        this.setState({editorState})
+    }
+
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value })
     }
 
     handleSubmit = async () => {
-
         let body = {
             title: this.state.title,
-            thesis: this.state.thesis,
+            editorState: this.state.editorState,
             ticker: this.state.ticker,
             longOrShort: this.state.longOrShort,
             user: this.props.user
@@ -41,7 +44,7 @@ export default class NewSpot extends Component {
             .then(() =>
                 this.setState({
                     title: '',
-                    thesis: '',
+                    editorState: null,
                     ticker: '',
                     longOrShort: '',
                 })
@@ -60,11 +63,50 @@ export default class NewSpot extends Component {
                       <h3 className="title theme-font">Post An Idea</h3>
                       <div className="form-group secondary-font title">
                         <label className="input"><b>Title</b></label>
-                        <input type="text" className="form-control" name="title" placeholder="Title" onChange={this.handleChange} value={this.name}></input>
+                        <input type="text" className="form-control" name="title" placeholder="Title" required onChange={this.handleChange} value={this.name}></input>
                       </div>
                       <div className="form-group secondary-font thesis">
                         <label className="input"><b>Thesis</b></label>
-                        <textarea type="text" className="form-control" name="thesis" placeholder="Thesis" onChange={this.handleChange} value={this.description}></textarea>
+                        <Editor
+                          editorState={this.state.editorState} 
+                          onEditorChange={this.onEditorChange}
+                          // value={this.editorState}
+                          // onChange={this.onEditorChange}
+                          initialValue='<p>Post your thesis...</p>'
+                          init={{
+                            statubar: true,
+                            height: 500,
+                            image_caption: true,
+                            image_title: true,
+                            image_uploadtab: true,
+                            plugins: [
+                              "advlist",   
+                              "autolink",
+                              "lists",
+                              "link",
+                              "image",
+                              "charmap",
+                              "anchor",
+                              "searchreplace",
+                              "visualblocks",
+                              "code",
+                              "fullscreen",
+                              "insertdatetime",
+                              "media",
+                              "table",
+                              "preview",
+                              "help",
+                              "wordcount",
+                            ],
+                            toolbar: "undo redo | blocks | " +
+                              "bold italic forecolor | alignleft aligncenter " +
+                              "alignright alignjustify | bullist numlist outdent indent | " +
+                              "removeformat | help",
+                            images_upload_url: '/api/ideas/uploadImage',
+                            image_title: true,
+                            automatic_uploads: true,
+                          }}
+                        />
                       </div>
                       <div className="form-group secondary-font ticker">
                         <label className="input"><b>Ticker Symbol</b></label>
@@ -85,7 +127,7 @@ export default class NewSpot extends Component {
                 </div>
               </form>
             </main>
-          </main>
+         </main>
         )
     }
 }
