@@ -27,7 +27,7 @@ async function uploadImage(req, res) {
         }
         return s3.upload(uploadParams).promise()
     }
-    // req.file is where the text editor content is located
+    // req.file is where the image is located
     const result = await uploadFile(req.file)
 
     // remove the image from the local '/uploads' folder

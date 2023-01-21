@@ -8,14 +8,14 @@ export default class NewSpot extends Component {
     
     state = {
         title: '',
-        editorState: null,
+        thesis: null,
         ticker: '',
         longOrShort: '',
     }
     
     
-    onEditorChange = (editorState) => {
-        this.setState({editorState})
+    onEditorChange = (thesis) => {
+        this.setState({thesis})
     }
 
     handleChange = (e) => {
@@ -25,7 +25,7 @@ export default class NewSpot extends Component {
     handleSubmit = async () => {
         let body = {
             title: this.state.title,
-            editorState: this.state.editorState,
+            thesis: this.state.thesis,
             ticker: this.state.ticker,
             longOrShort: this.state.longOrShort,
             user: this.props.user
@@ -44,7 +44,7 @@ export default class NewSpot extends Component {
             .then(() =>
                 this.setState({
                     title: '',
-                    editorState: null,
+                    thesis: null,
                     ticker: '',
                     longOrShort: '',
                 })
@@ -68,10 +68,8 @@ export default class NewSpot extends Component {
                       <div className="form-group secondary-font thesis">
                         <label className="input"><b>Thesis</b></label>
                         <Editor
-                          editorState={this.state.editorState} 
+                          thesis={this.state.thesis} 
                           onEditorChange={this.onEditorChange}
-                          // value={this.editorState}
-                          // onChange={this.onEditorChange}
                           initialValue='<p>Post your thesis...</p>'
                           init={{
                             statubar: true,

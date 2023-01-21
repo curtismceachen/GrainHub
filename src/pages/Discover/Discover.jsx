@@ -7,7 +7,7 @@ import './Discover.css';
 
 
 export default function Discover (props) {
-    // const [user, setUser] = useState({})
+    
     const [isActive, setActive] = useState({})
     const [publishers, setPublishers] = useState([])
     const [subscriptions, setSubscriptions] = useState([])

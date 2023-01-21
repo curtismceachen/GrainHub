@@ -7,16 +7,17 @@ module.exports = {
 }
 
 async function discover(req, res) {
-    console.log(req.params.id)
     let publishers = await User.find({ 'paymentInfo': {$ne: ''}, 'publisherAgreement': true })
-    // the user may not be a publisher, so grabbing separately
+    // The user may not be a publisher, so grab them separately.
+    // If there is a user (i.e. if they're signed in) then grab their object as well, so that I
+    // can access their "subscriptions" and decide to show either a "subscribe" or "unsubscribe"
+    // button on the frontend.
     if(req.params.id !== 'false') {
-        console.log('we have a user')
         let user = await User.findById(req.params.id)
         let userAndPublishers = {user, publishers}
         res.json(userAndPublishers)
+    // If not then just send the publishers
     } else {
-        console.log('no user!!!')
         res.json(publishers)
     }
 }

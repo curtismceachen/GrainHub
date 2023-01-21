@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-// const User = require('./models/User')
 
 
 const ideaSchema = new Schema({
@@ -18,13 +17,9 @@ const ideaSchema = new Schema({
     longOrShort: {
         type: String,
     },
-    editorState: {
-        type: String,
-    },
     user: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user',
-
     },
 })
 
