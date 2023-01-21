@@ -9,7 +9,7 @@ module.exports = {
     show
 }
 
-
+// s3 bucker info from .env
 const s3 = new aws.S3({
     accessKeyId: process.env.S3_ACCESS_ID,
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -17,29 +17,29 @@ const s3 = new aws.S3({
 })
 
 async function uploadImage(req, res) {
+    // upload the image to s3
     function uploadFile(file) {
         const fileStream = fs.createReadStream(file.path)
         const uploadParams = {
-            Bucket: 'skatespotter',
+            Bucket: 'investing-ideas-bucket',
             Body: fileStream,
             Key: file.filename
         }
         return s3.upload(uploadParams).promise()
     }
+    // req.file is where the text editor content is located
     const result = await uploadFile(req.file)
-    console.log(result)
 
+    // remove the image from the local '/uploads' folder
     fs.unlink(req.file.path, async function (err) {
         if (err)
             return res.status(400).json({ success: false, message: err.message })
         
-        console.log(JSON.stringify({location: result.Location}))
         res.json({location: result.Location})
     })
 }
 
 async function create(req, res) {
-    console.log(req.body.editorState)
     let idea = new Idea(req.body)
     await idea.save()
     res.json(idea)

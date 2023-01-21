@@ -23,6 +23,7 @@ export default function Discover(props) {
         })()
     }, [])
     
+    // sanitize the editorState html so it will be less vulnerable
     let sanitizedData = (data) => ({
       __html: DOMPurify.sanitize(data)
     })
@@ -39,8 +40,8 @@ export default function Discover(props) {
                 <div className="card card-spacing">
                   <div className="card-body">
                     <h5 className="card-title"><b>{i.title}</b></h5>
-                    <div className="card-subtitle">{i.ticker}</div>
-                    <div className="card-subtitle">{i.longOrShort}</div>
+                    {i.ticker && <div className="card-subtitle">{i.ticker}</div>}
+                    {i.longOrShort && <div className="card-subtitle">{i.longOrShort}</div>}
                     <div className="card-text" dangerouslySetInnerHTML={sanitizedData(i.editorState)}></div>
                   </div>
                 </div>
