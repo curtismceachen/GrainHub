@@ -1,12 +1,18 @@
 import React from 'react'
 import './UserLogout.css'
 import { redirect, Link } from 'react-router-dom'
+import { useState } from 'react'
 
 
 class UserLogout extends React.Component {
+// export default function UserLogout (props) {
     
+
+    // const [user, setUser] = useState()
+
     changeLoginStatus = () => {
         this.props.setUserInState(false)
+        // setUser(false)
         localStorage.removeItem('token')
         this.props.showAuthSidebar(false)
     }

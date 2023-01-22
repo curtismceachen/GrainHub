@@ -28,7 +28,7 @@ export default class LoginForm extends Component {
       
       let token = await fetchResponse.json()
       localStorage.setItem('token', token);
-
+      // console.log('heres the userDoc.use: ' + token)
       const userDoc = JSON.parse(atob(token.split('.')[1])).user;
       console.log("userDoc: " + userDoc)
       this.props.setUserInState(userDoc)
@@ -42,7 +42,6 @@ export default class LoginForm extends Component {
     <main>
         <div className="container">
           <div className="row">
-          {/* <div className="col-md-6"><img src="https://cdn.pixabay.com/photo/2018/07/29/19/52/skateboard-3570896_960_720.png" className="img-fluid" alt="alternatetext"></img></div> */}
           <div className="col-md-6">
             <h3 className="d-flex justify-content-center">Login</h3>
           <form autoComplete="off" onSubmit={this.handleSubmit} >

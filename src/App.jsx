@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import {useEffect, useState} from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css';
 import Discover from './pages/Discover/Discover'
@@ -13,27 +14,27 @@ import PubIdeas from './pages/PubIdeas/PubIdeas'
 export default class App extends Component {
   
   state = {
-    user: false,
+      user: false,
   }
 
   setUserInState = (incomingUserData) => {
-    console.log('incoming userdata: ' + incomingUserData)
-    this.setState({user: incomingUserData})
+      console.log('incoming userdata: ' + JSON.stringify(incomingUserData))
+      this.setState({user: incomingUserData})
   }
 
   componentDidMount() {
-    let token = localStorage.getItem('token')
-    if (token) {
-        const payload = JSON.parse(atob(token.split('.')[1]))
-        if (payload.exp < Date.now() / 1000) {
-          localStorage.removeItem('token')
-          token = null
-        } else {
-          console.log('payload.user: ' + JSON.stringify(payload.user))
-          this.setState({ user: payload.user })
-        }
-    }
+      let token = localStorage.getItem('token')
+      if (token) {
+          const payload = JSON.parse(atob(token.split('.')[1]))
+          if (payload.exp < Date.now() / 1000) {
+              localStorage.removeItem('token')
+              token = null
+          } else {
+              this.setState({ user: payload.user })
+          }
+      }
   }
+    
 
 
   render() {

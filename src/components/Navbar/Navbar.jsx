@@ -27,7 +27,8 @@ export default function Navbar(props) {
             <Link to='/' style={{color: 'inherit', textDecoration: 'inherit'}}>
               Discover
             </Link>
-            {props.user.publisherAgreement ?
+            {props.user &&
+            props.user.publisherAgreement ?
               <div className='theme-font'>
                 <Link to='/ideas/create' style={{color: 'inherit', textDecoration: 'inherit'}}>
                   Post an Investing Idea

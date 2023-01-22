@@ -12,6 +12,8 @@ export default function Discover(props) {
     const { id } = useParams()
 
     let getPubIdeas = async () => {
+        console.log("getPubIdeas!!!")
+        
         await fetch(`/api/ideas/show/${id}`)
           .then(res => res.json())
           .then(data => setIdeas(data))

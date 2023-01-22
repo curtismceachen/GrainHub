@@ -1,16 +1,15 @@
-import { Link } from "react-router-dom";
-import Navbar from '../../components/Navbar/Navbar';
-import React, {useEffect, useState} from "react";
+import { Link } from "react-router-dom"
+import React, {useEffect, useState} from "react"
 import SubscribeButton from '../../components/SubscribeButton/SubscribeButton'
 import UnsubscribeButton from '../../components/UnsubscribeButton/UnsubscribeButton'
-import './Discover.css';
+import './Discover.css'
 
 
 export default function Discover (props) {
-    
+  
     const [isActive, setActive] = useState({})
     const [publishers, setPublishers] = useState([])
-    // const [subscriptions, setSubscriptions] = useState([])
+    const [user, setUser] = useState()
 
     let handleSeeMore = (id) => {
         let temp = {...isActive}
@@ -19,14 +18,17 @@ export default function Discover (props) {
     }
 
     let getPublishers = async () => {
-        if (props.user){
-            let response = await fetch(`/api/publishers/discover/${props.user._id}`)
-              let data = await response.json()
-              props.setUserInState(data.user)
-              setPublishers(data.publishers)
+        let token = localStorage.getItem('token')
+        if (token) {
+            let payload = JSON.parse(atob(token.split('.')[1]))
+            let userId = payload.user._id
+            let response = await fetch(`/api/publishers/discover/${userId}`)
+                let data = await response.json()
+                props.setUserInState(data.user)
+                setPublishers(data.publishers)
         } else {
-            let id = 'false'
-            await fetch(`/api/publishers/discover/${id}`)
+            let userId = 'false'
+            await fetch(`/api/publishers/discover/${userId}`)
               .then(res => res.json())
               .then(data => setPublishers(data))
         }
@@ -34,10 +36,12 @@ export default function Discover (props) {
 
     useEffect(() => {
         (async() => {
+            console.log('useEffect!!!')
             await getPublishers()
         })()
     },[])
     
+
     
     return (
         <main>
