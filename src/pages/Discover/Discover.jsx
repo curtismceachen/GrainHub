@@ -6,10 +6,9 @@ import './Discover.css'
 
 
 export default function Discover (props) {
-  
+
     const [isActive, setActive] = useState({})
     const [publishers, setPublishers] = useState([])
-    const [user, setUser] = useState()
 
     let handleSeeMore = (id) => {
         let temp = {...isActive}
@@ -36,7 +35,6 @@ export default function Discover (props) {
 
     useEffect(() => {
         (async() => {
-            console.log('useEffect!!!')
             await getPublishers()
         })()
     },[])

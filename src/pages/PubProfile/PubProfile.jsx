@@ -27,7 +27,12 @@ export default function Discover(props) {
         <main>
           <div className="spots-page spot-background-image">
             <h1 className="discover-title theme-font">Publisher Profile</h1>
-            <Link to={`/ideas/show/${id}`}>Ideas</Link>
+            {props.user && (
+              props.user.subscriptions.some(s => s.publisherId === publisher._id) ?
+                <Link to={`/ideas/show/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>Ideas</Link>
+              :
+              <div>Ideas</div>
+            )}
             <div className="discover-subtitle secondary-font"></div>
             <div className="discover secondary-font">
               <div className="align-items-start discover row row-cols-3">
