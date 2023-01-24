@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify'
 import './PubIdeas.css';
 
 
-export default function Discover(props) {
+export default function PubIdeas(props) {
     
     const [ideas, setIdeas] = useState([]);
     const { id } = useParams()

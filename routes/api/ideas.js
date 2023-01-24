@@ -6,8 +6,8 @@ const upload = multer({ dest: 'uploads/' })
 
 
 router.post('/create', ideasCtrl.create)
-// upload the image 'file' in the /uploads folder, then go to ctrl function
+// upload the image 'file' in the 'uploads/' folder, then go to ctrl function
 router.post('/uploadImage', upload.single('file'), ideasCtrl.uploadImage)
 router.get('/show/:id', ideasCtrl.show)
-
+router.get('/ideasFeed/:userId', ideasCtrl.ideasFeed)
 module.exports = router

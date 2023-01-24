@@ -9,6 +9,7 @@ import EditProfile from './pages/EditProfile/EditProfile'
 import NewIdea from './pages/NewIdea/NewIdea'
 import PubProfile from './pages/PubProfile/PubProfile'
 import PubIdeas from './pages/PubIdeas/PubIdeas'
+import IdeasFeed from './pages/IdeasFeed/IdeasFeed'
 
 
 export default class App extends Component {
@@ -44,12 +45,13 @@ export default class App extends Component {
         <Routes>
           <Route path='/ideas/create' element={<NewIdea user={this.state.user} setUserInState={this.setUserInState}/>}/>
           <Route path='/users/editprofile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>} />
-          <Route path='/users/addSubscription' />
-          <Route path='/users/removeSubscription' />
+          <Route path='/users/addSubscription'/>
+          <Route path='/users/removeSubscription'/>
           <Route path='/publishers/show/:id' element={<PubProfile user={this.state.user}/>}/>
           <Route path='/ideas/show/:id' element={<PubIdeas user={this.state.user}/>}/>
-          <Route path='/discover/:id' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>} />
-          <Route path='*' element={<Navigate to='/discover/:id' replace />} />
+          <Route path='/ideas/ideasFeed/:userId' element={<IdeasFeed user={this.state.user}/>}/>
+          <Route path='/discover/:id' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>}/>
+          <Route path='*' element={<Navigate to='/discover/:id' replace />}/>
         </Routes>
       </div>
     )

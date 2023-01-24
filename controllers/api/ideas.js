@@ -1,12 +1,15 @@
 const Idea = require('../../models/Idea')
+const User = require('../../models/User')
 const aws = require('aws-sdk')
 const fs = require('fs')
+// const { default: UserLogout } = require('../../src/components/UserLogout/UserLogout')
 
 
 module.exports = {
     create,
     uploadImage,
-    show
+    show,
+    ideasFeed
 }
 
 // s3 bucker info from .env
@@ -48,4 +51,27 @@ async function create(req, res) {
 async function show(req, res) {
     let ideas = await Idea.find({ 'user': req.params.id})
     res.json(ideas)
+}
+
+async function ideasFeed(req, res) {
+    let user = await User.findById(req.params.userId)
+    let subscriptionIds = user.subscriptions.map(s => s.publisherId)
+    let publishers = await User.find({'_id': { $in: subscriptionIds}})
+    let allPublishersIdeas = await Idea.find({'user': { $in: subscriptionIds }})
+    let ideasWithPubUsername = allPublishersIdeas.map(idea => {
+        let subPub = publishers.find(s => String(s._id) == String(idea.user))
+        if (!subPub) return null 
+        return {
+            id: idea._id,
+            title: idea.title,
+            thesis: idea.thesis,
+            ticker: idea.ticker,
+            longOrShort: idea.longOrShort,
+            publisher: {
+                id: idea.user,
+                username: subPub.username
+            }
+        }
+    })
+    res.json(ideasWithPubUsername)
 }

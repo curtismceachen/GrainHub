@@ -21,6 +21,7 @@ const ideaSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user',
     },
+    // need to add timestamps to these
 })
 
 module.exports = mongoose.model('Idea', ideaSchema)
