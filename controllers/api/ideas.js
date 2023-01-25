@@ -2,7 +2,6 @@ const Idea = require('../../models/Idea')
 const User = require('../../models/User')
 const aws = require('aws-sdk')
 const fs = require('fs')
-// const { default: UserLogout } = require('../../src/components/UserLogout/UserLogout')
 
 
 module.exports = {
@@ -59,8 +58,8 @@ async function ideasFeed(req, res) {
     let publishers = await User.find({'_id': { $in: subscriptionIds}})
     let allPublishersIdeas = await Idea.find({'user': { $in: subscriptionIds }})
     let ideasWithPubUsername = allPublishersIdeas.map(idea => {
-        let subPub = publishers.find(s => String(s._id) == String(idea.user))
-        if (!subPub) return null 
+        let publisher = publishers.find(s => String(s._id) == String(idea.user))
+        if (!publisher) return null 
         return {
             id: idea._id,
             title: idea.title,
@@ -69,7 +68,7 @@ async function ideasFeed(req, res) {
             longOrShort: idea.longOrShort,
             publisher: {
                 id: idea.user,
-                username: subPub.username
+                username: publisher.username
             }
         }
     })

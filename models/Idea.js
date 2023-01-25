@@ -17,7 +17,7 @@ const ideaSchema = new Schema({
     longOrShort: {
         type: String,
     },
-    user: { 
+    user: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'user',
     },

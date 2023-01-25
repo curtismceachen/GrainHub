@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom"
 import React, {useEffect, useState} from "react"
-import SubscribeButton from '../../components/SubscribeButton/SubscribeButton'
-import UnsubscribeButton from '../../components/UnsubscribeButton/UnsubscribeButton'
 import DOMPurify from 'dompurify'
 import {useParams} from 'react-router'
 

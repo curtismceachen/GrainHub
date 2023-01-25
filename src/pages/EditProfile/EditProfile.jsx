@@ -9,7 +9,8 @@ export default class EditProfile extends Component {
         _id: '',
         email: '',
         username: '',
-        description: '',
+        shortDescription: '',
+        fullDescription: '',
         paymentInfo: '',
         publisherAgreement: false,
     }
@@ -27,7 +28,8 @@ export default class EditProfile extends Component {
             _id: this.state._id,
             email: this.state.email,
             username: this.state.username,
-            description: this.state.description,
+            shortDescription: this.state.shortDescription,
+            fullDescription: this.state.fullDescription,
             paymentInfo: this.state.paymentInfo,
             publisherAgreement: this.state.publisherAgreement
         }
@@ -39,7 +41,6 @@ export default class EditProfile extends Component {
             body: JSON.stringify(body)
         }
         await fetch('/api/users/editprofile', options)
-            // .then(this.props.setUserInState(this.state))
             .then(res => res.json())
             .then(() => {
                 this.props.setUserInState(this.state)
@@ -47,12 +48,12 @@ export default class EditProfile extends Component {
     }
 
     componentDidMount() {
-        console.log('props.user.description: ' + this.props.user.description)
         this.setState({
             _id: this.props.user._id,
-            email: this.props.email,
+            email: this.props.user.email,
             username: this.props.user.username,
-            description: this.props.user.description,
+            shortDescription: this.props.user.shortDescription,
+            fullDescription: this.props.fullDescription,
             paymentInfo: this.props.user.paymentInfo,
             publisherAgreement: this.props.user.publisherAgreement
         })
@@ -70,9 +71,14 @@ export default class EditProfile extends Component {
                 <input type="text" className="form-control" name="username" onChange={this.handleChange} value={this.state.username}></input>
               </div>
               <div className="form-group">
-                <label className="inputUD"><span className="label"><b>Description</b></span></label>
+                <label className="inputUD"><span className="label"><b>Short Description</b></span></label>
                 {/* this textarea to be replaced later with a text editor */}
-                <textarea type="text" className="form-control" name="description" onChange={this.handleChange} value={this.state.description}></textarea>
+                <textarea type="text" className="form-control" name="shortDescription" onChange={this.handleChange} value={this.state.shortDescription}></textarea>
+              </div>
+              <div className="form-group">
+                <label className="inputUD"><span className="label"><b>Full Description</b></span></label>
+                {/* this textarea to be replaced later with a text editor */}
+                <textarea type="text" className="form-control" name="fullDescription" onChange={this.handleChange} value={this.state.fullDescription}></textarea>
               </div>
               <div className="form-group address-update">
                 <label className="inputUD"><span className="label"><b>Fake Payment Info</b></span></label>

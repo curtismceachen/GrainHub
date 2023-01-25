@@ -44,7 +44,8 @@ async function login(req, res) {
 
 async function editProfile(req, res) {
     let user = await User.findByIdAndUpdate(req.body._id, {
-        description: req.body.description,
+        shortDescription: req.body.shortDescription,
+        fullDescription: req.body.fullDescription,
         paymentInfo: req.body.paymentInfo,
         publisherAgreement: req.body.publisherAgreement
     })

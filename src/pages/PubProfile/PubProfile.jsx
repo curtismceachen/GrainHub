@@ -28,7 +28,7 @@ export default function Discover(props) {
           <div className="spots-page spot-background-image">
             <h1 className="discover-title theme-font">Publisher Profile</h1>
             {props.user && (
-              props.user.subscriptions.some(s => s.publisherId === publisher._id) ?
+              props.user.subscriptions.some(s => s.publisherId === publisher._id) || props.user._id === id ?
                 <Link to={`/ideas/show/${id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>Ideas</Link>
               :
               <div>Ideas</div>
@@ -40,7 +40,7 @@ export default function Discover(props) {
                   <div className="card-body">
                     <h5 className="card-title"><b>{publisher.username}</b></h5>
                     <div className="card-subtitle">Deep value, special situations</div>
-                    <div className="card-text"> {publisher.description}</div>
+                    <div className="card-text"> {publisher.fullDescription}</div>
                   </div>
                 </div>
               </div>

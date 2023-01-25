@@ -17,10 +17,16 @@ const userSchema = new Schema({
         minLength: 8,
         required: true
     },
-    description: {
+    shortDescription: {
         type: String,
         trim: true,
         maxLength: 70,
+        default: '',
+    },
+    fullDescription: {
+        type: String,
+        trim: true,
+        maxLength: 4000,
         default: '',
     },
     paymentInfo: {type: String},

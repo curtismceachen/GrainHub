@@ -54,10 +54,10 @@ export default function Discover (props) {
                       <Link to={`/publishers/show/${p._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                         <h5 className="card-title"><b>{p.username}</b></h5>
                       </Link>
-                      <div className="card-text"> {p.description}</div>
+                      <div className="card-text"> {p.shortDescription}</div>
                       <button className="btn btn-primary btn-sm update-button" onClick={() => handleSeeMore(p._id)}>See more</button>
                       <div className={!isActive[p._id] ? "hidden" : null}>
-                        <div>{p.description}</div>
+                        <div>{p.shortDescription}</div>
                       </div>
                       {props.user && (
                         props.user.subscriptions.some(s => s.publisherId === p._id) ?
