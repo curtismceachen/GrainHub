@@ -18,7 +18,6 @@ export default function IdeasFeed (props) {
     // }
 
     let getIdeas = async () => {
-        console.log('PROPS.USER._ID: ' + userId)
         await fetch(`/api/ideas/ideasFeed/${userId}`)
             .then(res => res.json())
             .then(data => setIdeasWithPubUsername(data))
@@ -34,6 +33,7 @@ export default function IdeasFeed (props) {
       __html: DOMPurify.sanitize(data)
     })
     
+
     return (
       <main>
         <div className="spots-page spot-background-image">

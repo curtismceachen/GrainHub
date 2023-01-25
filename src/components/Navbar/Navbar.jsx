@@ -44,7 +44,16 @@ export default function Navbar(props) {
                 </div>
             )}
             {props.user ?
-              <UserLogout setUserInState={props.setUserInState} showAuthSidebar={showAuthSidebar}/>
+              <div className='dropdown show'>
+                <button type='button' className="btn btn-secondary dropdown-toggle" data-bs-toggle='dropdown' aria-expanded='false'>
+                  Profile Pic
+                </button>
+                <div className='dropdown-menu' aria-labelledby='dropdownMenuLink'>
+                  <a className='dropdown-item' href='#'>Profile</a>
+                  <a className='dropdown-item' href='#'>Edit Profile</a>
+                  <UserLogout setUserInState={props.setUserInState} showAuthSidebar={showAuthSidebar}/>
+                </div>
+              </div>
             :
               <div>
                 <button className="btn btn-light" onClick={showAuthSidebar}>Log in</button>
