@@ -5,7 +5,7 @@ import {useParams} from 'react-router'
 import './PubProfile.css';
 
 
-export default function Discover(props) {
+export default function PubProfile(props) {
     
     const [publisher, setPublisher] = useState([]);
     const { id } = useParams()

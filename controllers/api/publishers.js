@@ -3,7 +3,8 @@ const User = require('../../models/User')
 
 module.exports = {
     discover,
-    showPubProfile
+    showPubProfile,
+    becomePublisher
 }
 
 async function discover(req, res) {
@@ -25,4 +26,14 @@ async function discover(req, res) {
 async function showPubProfile(req, res) {
     let publisher = await User.findById(req.params.id)
     res.json(publisher)
+}
+
+async function becomePublisher(req, res) {
+    let user = await User.findByIdAndUpdate(req.body._id, {
+        shortDescription: req.body.shortDescription,
+        fullDescription: req.body.fullDescription,
+        paymentInfo: req.body.paymentInfo,
+        publisherAgreement: req.body.publisherAgreement
+    })
+    res.json(user)
 }

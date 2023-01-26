@@ -8,6 +8,7 @@ const SALT_ROUNDS = 6
 module.exports = {
     signup,
     login,
+    showProfile,
     editProfile,
     addSubscription,
     removeSubscription
@@ -40,6 +41,11 @@ async function login(req, res) {
     } catch (error) {
         res.status(400).json('Bad Credentials')
     }
+}
+
+async function showProfile(req, res) {
+    let user = await User.findById(req.params.id)
+    res.json(user)
 }
 
 async function editProfile(req, res) {

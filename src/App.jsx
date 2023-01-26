@@ -6,10 +6,12 @@ import Discover from './pages/Discover/Discover'
 import Auth from './pages/Auth/Auth'
 import Navbar from './components/Navbar/Navbar'
 import EditProfile from './pages/EditProfile/EditProfile'
+import BecomePublisher from './pages/BecomePublisher/BecomePublisher'
 import NewIdea from './pages/NewIdea/NewIdea'
 import PubProfile from './pages/PubProfile/PubProfile'
 import PubIdeas from './pages/PubIdeas/PubIdeas'
 import IdeasFeed from './pages/IdeasFeed/IdeasFeed'
+import UserProfile from './pages/UserProfile/UserProfile'
 
 
 export default class App extends Component {
@@ -35,7 +37,6 @@ export default class App extends Component {
           }
       }
   }
-    
 
 
   render() {
@@ -44,7 +45,9 @@ export default class App extends Component {
         <Navbar user={this.state.user} setUserInState={this.setUserInState}/>
         <Routes>
           <Route path='/ideas/create' element={<NewIdea user={this.state.user} setUserInState={this.setUserInState}/>}/>
-          <Route path='/users/editprofile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>} />
+          <Route path='/users/showProfile' element={<UserProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
+          <Route path='/users/editProfile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
+          <Route path='/users/becomePublisher' element={<BecomePublisher user={this.state.user} setUserInState={this.setUserInState}/>} />
           <Route path='/users/addSubscription'/>
           <Route path='/users/removeSubscription'/>
           <Route path='/publishers/show/:id' element={<PubProfile user={this.state.user}/>}/>

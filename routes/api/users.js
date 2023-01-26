@@ -6,6 +6,8 @@ const usersCtrl = require('../../controllers/api/users')
 router.post('/signup', usersCtrl.signup)
 // login
 router.post('/login', usersCtrl.login)
+
+router.get('/showProfile/:userId', usersCtrl.showProfile)
 // edit
 router.put('/editprofile', usersCtrl.editProfile)
 
