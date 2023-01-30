@@ -48,12 +48,32 @@ async function showProfile(req, res) {
     res.json(user)
 }
 
+// const s3 = new aws.S3({
+//     accessKeyId: process.env.S3_ACCESS_ID,
+//     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+//     region: process.env.S3_BUCKET_REGION
+// })
+
 async function editProfile(req, res) {
+    // function uploadFile(file) {
+    //     const fileStream = fs.createReadStream(file.path)
+    //     const uploadParams = {
+    //         Bucket: 'investing-ideas-bucket',
+    //         Body: fileStream,
+    //         Key: file.filename
+    //     }
+    //     return s3.upload(uploadParams).promise()
+    // }
+    // const result = await uploadFile(req.file)
+    console.log(req.body)
     let user = await User.findByIdAndUpdate(req.body._id, {
+        // profilePic: req.body.profilePic,
+        username: req.body.username,
+        email: req.body.email,
         shortDescription: req.body.shortDescription,
         fullDescription: req.body.fullDescription,
         paymentInfo: req.body.paymentInfo,
-        publisherAgreement: req.body.publisherAgreement
+        // publisherAgreement: req.body.publisherAgreement
     })
     res.json(user)
 }

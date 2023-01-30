@@ -17,6 +17,9 @@ const userSchema = new Schema({
         minLength: 8,
         required: true
     },
+    // profilePic: {
+    //     type: String
+    // },
     shortDescription: {
         type: String,
         trim: true,

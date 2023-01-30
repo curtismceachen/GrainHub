@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './BecomePublisher.css'
 
 
@@ -43,9 +43,10 @@ export default class BecomePublisher extends Component {
         }
         await fetch('/api/publishers/becomePublisher', options)
             .then(res => res.json())
-            .then(() => {
-                this.props.setUserInState(this.state)
+            .then(data => {
+                this.props.setUserInState(data)
             })
+            // useNavigate('/discover/:id')
     }
 
     componentDidMount() {
@@ -68,7 +69,7 @@ export default class BecomePublisher extends Component {
             <input type='hidden' value={this.state.email}></input>
             <div>
               <h4>Become A Publisher</h4>
-              <h6>{this.state.username}</h6>
+              <h6>{this.props.user.username}</h6>
               {/* <div className="form-group name-update">
                 <label className="inputUD"><span className="label"><b>Username</b></span></label>
                 <input type="text" className="form-control" name="username" onChange={this.handleChange} value={this.state.username}></input>
@@ -76,24 +77,24 @@ export default class BecomePublisher extends Component {
               <div className="form-group">
                 <label className="inputUD"><span className="label"><b>Short Description</b></span></label>
                 {/* this textarea to be replaced later with a text editor */}
-                <textarea type="text" className="form-control" name="shortDescription" onChange={this.handleChange} value={this.state.shortDescription}></textarea>
+                <textarea type="text" className="form-control" name="shortDescription" onChange={this.handleChange}></textarea>
               </div>
               <div className="form-group">
                 <label className="inputUD"><span className="label"><b>Full Description</b></span></label>
                 {/* this textarea to be replaced later with a text editor */}
-                <textarea type="text" className="form-control" name="fullDescription" onChange={this.handleChange} value={this.state.fullDescription}></textarea>
+                <textarea type="text" className="form-control" name="fullDescription" onChange={this.handleChange}></textarea>
               </div>
               <div className="form-group address-update">
                 <label className="inputUD"><span className="label"><b>Fake Payment Info</b></span></label>
-                <input type="text" className="form-control" name="paymentInfo" onChange={this.handleChange} value={this.state.paymentInfo}></input>
+                <input type="text" className="form-control" name="paymentInfo" onChange={this.handleChange}></input>
               </div>
               <div className="form-group address-update">
                 <label className="inputUD"><span className="label"><b>Fake Publisher Agreement</b></span></label>
-                <input type="checkbox" name="publisherAgreement" required onClick={this.handleCBChange} value={this.state.publisherAgreement}></input>
+                <input type="checkbox" name="publisherAgreement" required onClick={this.handleCBChange}></input>
               *</div>
-              <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+              {/* <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}> */}
                 <input type="submit" className="btn btn-success"></input>
-              </Link>
+              {/* </Link> */}
             </div>
           </form>
         )

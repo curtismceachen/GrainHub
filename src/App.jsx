@@ -15,7 +15,7 @@ import UserProfile from './pages/UserProfile/UserProfile'
 
 
 export default class App extends Component {
-  
+
   state = {
       user: false,
   }
@@ -47,7 +47,7 @@ export default class App extends Component {
           <Route path='/ideas/create' element={<NewIdea user={this.state.user} setUserInState={this.setUserInState}/>}/>
           <Route path='/users/showProfile' element={<UserProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
           <Route path='/users/editProfile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
-          <Route path='/users/becomePublisher' element={<BecomePublisher user={this.state.user} setUserInState={this.setUserInState}/>} />
+          <Route path='/publishers/becomePublisher' element={<BecomePublisher user={this.state.user} setUserInState={this.setUserInState}/>} />
           <Route path='/users/addSubscription'/>
           <Route path='/users/removeSubscription'/>
           <Route path='/publishers/show/:id' element={<PubProfile user={this.state.user}/>}/>

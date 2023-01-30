@@ -9,7 +9,8 @@ router.post('/login', usersCtrl.login)
 
 router.get('/showProfile/:userId', usersCtrl.showProfile)
 // edit
-router.put('/editprofile', usersCtrl.editProfile)
+console.log('users router')
+router.put('/editProfile', usersCtrl.editProfile)
 
 router.put('/addSubscription', usersCtrl.addSubscription)
 

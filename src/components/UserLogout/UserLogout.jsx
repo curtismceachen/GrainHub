@@ -16,7 +16,7 @@ class UserLogout extends React.Component {
         return (
         <Link to='/' style={{color: 'inherit', textDecoration: 'inherit'}}>
           {/* <button className="btn btn-light" </button> */}
-          <a className='dropdown-item' href='#' onClick={this.changeLoginStatus}>Log out</a>
+          <div className='dropdown-item' href='#' onClick={this.changeLoginStatus}>Log out</div>
         </Link>
         )
     }

@@ -38,7 +38,7 @@ export default function Navbar(props) {
               :
               props.user &&
                 <div className="theme-font">
-                  <Link to='/users/becomePublisher' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                  <Link to='/publishers/becomePublisher' style={{ color: 'inherit', textDecoration: 'inherit' }}>
                     Become A Publisher
                   </Link>
                 </div>
@@ -51,15 +51,16 @@ export default function Navbar(props) {
                 <div className='dropdown-menu' aria-labelledby='dropdownMenuLink'>
                   {props.user.publisherAgreement ?
                     <Link to={`/publishers/show/${props.user._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }} >
-                      <a className='dropdown-item' href='#'>Profile</a>
+                      <div className='dropdown-item' href='#'>Profile</div>
                     </Link>
                   :
                     <Link to='/users/showProfile' style={{ color: 'inherit', textDecoration: 'inherit' }} >
-                      <a className='dropdown-item' href='#'>Profile</a>
+                      <div className='dropdown-item' href='#'>Profile</div>
                     </Link>
                   }
+                  {console.log(props.user._id)}
                   <Link to='/users/editProfile' style={{ color: 'inherit', textDecoration: 'inherit' }} >
-                    <a className='dropdown-item' href='#'>Edit Profile</a>
+                    <div className='dropdown-item' href='#'>Edit Profile</div>
                   </Link>
                   <UserLogout setUserInState={props.setUserInState} showAuthSidebar={showAuthSidebar}/>
                 </div>
