@@ -13,7 +13,6 @@ async function discover(req, res) {
     // If there is a user (i.e. if they're signed in) then grab their object as well, so that I
     // can access their "subscriptions" and decide to show either a "subscribe" or "unsubscribe"
     // button on the frontend.
-    console.log(req.params.id)
     if(req.params.id !== 'false') {
         let user = await User.findById(req.params.id)
         let userAndPublishers = {user, publishers}

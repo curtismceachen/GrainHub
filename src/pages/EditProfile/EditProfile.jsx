@@ -9,15 +9,15 @@ import './EditProfile.css'
 export default function EditProfile(props) {
     
     const [user, setUser] = useState({})
-    const { id } = useParams()
+    const { userId } = useParams()
     const navigate = useNavigate()
 
     let handleChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
     }
 
-    let handleSubmit = async () => {
-        
+    let handleSubmit = async (e) => {
+        e.preventDefault()
         let body = {
             _id: user._id,
             email: user.email,
@@ -37,15 +37,20 @@ export default function EditProfile(props) {
         
         await fetch('/api/users/editProfile', options)
             .then(res => res.json())
-            .then(data => {
-                props.setUserInState(data)
-            })
-            .then(navigate('/users/showProfile'))
+            .then(data => props.setUserInState(data))
+            .then(navigate(`/users/getProfile/${user._id}`))
+    }
+
+    let getProfile = async () => {
+        await fetch(`/api/users/getProfile/${userId}`)
+            .then(res => res.json())
+            .then(data => setUser(data))
     }
 
     useEffect(() => {
-        (() => {
+        (async () => {
             setUser(props.user)
+            await getProfile()
         })()
     },[props.user])
 

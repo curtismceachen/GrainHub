@@ -19,8 +19,6 @@ export default class Auth extends React.Component {
             </a>
           
           {/* If showLogin is true, show the login form. If false, show the signup form */}
-          {console.log('this.props: ' + this.props)}
-          {console.log('this.props.setuser...: ' + this.props.setUserInState)}
           {this.state.showSignUp ? 
             <SignUpForm setUserInState={this.props.setUserInState} />
             :

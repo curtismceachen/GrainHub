@@ -54,12 +54,11 @@ export default function Navbar(props) {
                       <div className='dropdown-item' href='#'>Profile</div>
                     </Link>
                   :
-                    <Link to='/users/showProfile' style={{ color: 'inherit', textDecoration: 'inherit' }} >
+                    <Link to={`/users/getProfile/${props.user._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }} >
                       <div className='dropdown-item' href='#'>Profile</div>
                     </Link>
                   }
-                  {console.log(props.user._id)}
-                  <Link to='/users/editProfile' style={{ color: 'inherit', textDecoration: 'inherit' }} >
+                  <Link to={`/users/editProfile/${props.user._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }} >
                     <div className='dropdown-item' href='#'>Edit Profile</div>
                   </Link>
                   <UserLogout setUserInState={props.setUserInState} showAuthSidebar={showAuthSidebar}/>

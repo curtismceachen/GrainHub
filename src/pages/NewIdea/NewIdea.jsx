@@ -49,6 +49,7 @@ export default class NewSpot extends Component {
                     longOrShort: '',
                 })
             )
+            
     }
 
 

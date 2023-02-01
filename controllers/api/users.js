@@ -8,7 +8,7 @@ const SALT_ROUNDS = 6
 module.exports = {
     signup,
     login,
-    showProfile,
+    getProfile,
     editProfile,
     addSubscription,
     removeSubscription
@@ -43,8 +43,10 @@ async function login(req, res) {
     }
 }
 
-async function showProfile(req, res) {
-    let user = await User.findById(req.params.id)
+async function getProfile(req, res) {
+    console.log(req.params.userId)
+    let user = await User.findById(req.params.userId)
+    console.log('user: ' + user)
     res.json(user)
 }
 

@@ -13,7 +13,6 @@ import PubIdeas from './pages/PubIdeas/PubIdeas'
 import IdeasFeed from './pages/IdeasFeed/IdeasFeed'
 import UserProfile from './pages/UserProfile/UserProfile'
 
-
 export default class App extends Component {
 
   state = {
@@ -21,11 +20,10 @@ export default class App extends Component {
   }
 
   setUserInState = (incomingUserData) => {
-      console.log('incoming userdata: ' + JSON.stringify(incomingUserData))
       this.setState({user: incomingUserData})
   }
 
-  componentDidMount() {
+  loginStatus = async () => {
       let token = localStorage.getItem('token')
       if (token) {
           const payload = JSON.parse(atob(token.split('.')[1]))
@@ -33,11 +31,24 @@ export default class App extends Component {
               localStorage.removeItem('token')
               token = null
           } else {
-              this.setState({ user: payload.user })
+              try {
+                  console.log('payload.user: ' + JSON.stringify(payload.user))
+                  let userId = payload.user._id
+                  console.log(userId)
+                  await fetch(`/api/users/getProfile/${userId}`)
+                      .then(res => res.json())
+                      .then(data => this.setState(data))
+                      .then(console.log(JSON.stringify(this.state.user)))
+              } catch (error) {
+                  console.log(error)
+              }
           }
       }
   }
 
+  async componentDidMount() {
+      await this.loginStatus()
+  }
 
   render() {
     return (
@@ -45,8 +56,8 @@ export default class App extends Component {
         <Navbar user={this.state.user} setUserInState={this.setUserInState}/>
         <Routes>
           <Route path='/ideas/create' element={<NewIdea user={this.state.user} setUserInState={this.setUserInState}/>}/>
-          <Route path='/users/showProfile' element={<UserProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
-          <Route path='/users/editProfile' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
+          <Route path='/users/getProfile/:userId' element={<UserProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
+          <Route path='/users/editProfile/:userId' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
           <Route path='/publishers/becomePublisher' element={<BecomePublisher user={this.state.user} setUserInState={this.setUserInState}/>} />
           <Route path='/users/addSubscription'/>
           <Route path='/users/removeSubscription'/>

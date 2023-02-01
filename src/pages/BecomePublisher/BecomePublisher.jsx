@@ -46,7 +46,7 @@ export default class BecomePublisher extends Component {
             .then(data => {
                 this.props.setUserInState(data)
             })
-            // useNavigate('/discover/:id')
+            // .then(navigate('/discover/:id'))
     }
 
     componentDidMount() {
@@ -70,13 +70,8 @@ export default class BecomePublisher extends Component {
             <div>
               <h4>Become A Publisher</h4>
               <h6>{this.props.user.username}</h6>
-              {/* <div className="form-group name-update">
-                <label className="inputUD"><span className="label"><b>Username</b></span></label>
-                <input type="text" className="form-control" name="username" onChange={this.handleChange} value={this.state.username}></input>
-              </div> */}
               <div className="form-group">
                 <label className="inputUD"><span className="label"><b>Short Description</b></span></label>
-                {/* this textarea to be replaced later with a text editor */}
                 <textarea type="text" className="form-control" name="shortDescription" onChange={this.handleChange}></textarea>
               </div>
               <div className="form-group">
