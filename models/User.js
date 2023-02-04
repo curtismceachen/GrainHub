@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 
 const userSchema = new Schema({
+    profilePic: {type: String},
     username: {type: String, required: true},
     email: {
         type: String,
@@ -17,9 +18,6 @@ const userSchema = new Schema({
         minLength: 8,
         required: true
     },
-    // profilePic: {
-    //     type: String
-    // },
     shortDescription: {
         type: String,
         trim: true,

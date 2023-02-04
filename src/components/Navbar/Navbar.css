@@ -23,3 +23,14 @@
 .navbar {
   margin-bottom: 0px !important;
 }
+
+.navProfilePic {
+  cursor: pointer;
+  background-size: cover;
+  object-fit: contain;
+  border-radius: 50%;
+  max-width:115px;
+  max-height:47px;
+  width: auto;
+  height: auto;
+}

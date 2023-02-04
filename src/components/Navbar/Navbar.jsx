@@ -10,7 +10,7 @@ export default function Navbar(props) {
     const [sidebar, setAuthSidebar] = useState(false)
 
     const showAuthSidebar = () => setAuthSidebar(!sidebar)
-    
+    const profilePic = props.user.profilePic
     
     return (
       <main>
@@ -45,9 +45,11 @@ export default function Navbar(props) {
             )}
             {props.user ?
               <div className='dropdown show'>
-                <button type='button' className="btn btn-secondary dropdown-toggle" data-bs-toggle='dropdown' aria-expanded='false'>
-                  Profile Pic
-                </button>
+                {props.user.profilePic ?
+                  <img className='navProfilePic' data-bs-toggle='dropdown' aria-expanded='false' src={props.user.profilePic}></img>
+                :
+                <button type='button' className="btn btn-secondary dropdown-toggle" data-bs-toggle='dropdown' aria-expanded='false'>Profile</button>
+                }
                 <div className='dropdown-menu' aria-labelledby='dropdownMenuLink'>
                   {props.user.publisherAgreement ?
                     <Link to={`/publishers/show/${props.user._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }} >

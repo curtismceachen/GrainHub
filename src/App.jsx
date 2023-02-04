@@ -1,9 +1,8 @@
 import { Component } from 'react'
 import {useEffect, useState} from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import './App.css';
+import './App.css'
 import Discover from './pages/Discover/Discover'
-import Auth from './pages/Auth/Auth'
 import Navbar from './components/Navbar/Navbar'
 import EditProfile from './pages/EditProfile/EditProfile'
 import BecomePublisher from './pages/BecomePublisher/BecomePublisher'
@@ -12,6 +11,7 @@ import PubProfile from './pages/PubProfile/PubProfile'
 import PubIdeas from './pages/PubIdeas/PubIdeas'
 import IdeasFeed from './pages/IdeasFeed/IdeasFeed'
 import UserProfile from './pages/UserProfile/UserProfile'
+
 
 export default class App extends Component {
 

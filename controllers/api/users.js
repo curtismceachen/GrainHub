@@ -1,6 +1,8 @@
 const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const aws = require('aws-sdk')
+const fs = require('fs')
 
 const SALT_ROUNDS = 6
 
@@ -44,38 +46,37 @@ async function login(req, res) {
 }
 
 async function getProfile(req, res) {
-    console.log(req.params.userId)
     let user = await User.findById(req.params.userId)
-    console.log('user: ' + user)
     res.json(user)
 }
 
-// const s3 = new aws.S3({
-//     accessKeyId: process.env.S3_ACCESS_ID,
-//     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-//     region: process.env.S3_BUCKET_REGION
-// })
+const s3 = new aws.S3({
+    accessKeyId: process.env.S3_ACCESS_ID,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    region: process.env.S3_BUCKET_REGION
+})
 
 async function editProfile(req, res) {
-    // function uploadFile(file) {
-    //     const fileStream = fs.createReadStream(file.path)
-    //     const uploadParams = {
-    //         Bucket: 'investing-ideas-bucket',
-    //         Body: fileStream,
-    //         Key: file.filename
-    //     }
-    //     return s3.upload(uploadParams).promise()
-    // }
-    // const result = await uploadFile(req.file)
-    console.log(req.body)
+    console.log('editProfile ctrler')
+    console.log(req.file)
+    function uploadFile(file) {
+        const fileStream = fs.createReadStream(file.path)
+        const uploadParams = {
+            Bucket: 'investing-ideas-bucket',
+            Body: fileStream,
+            Key: file.filename
+        }
+        return s3.upload(uploadParams).promise()
+    }
+    const result = await uploadFile(req.file)
+    console.log(req.body._id)
     let user = await User.findByIdAndUpdate(req.body._id, {
-        // profilePic: req.body.profilePic,
+        profilePic: result.Location,
         username: req.body.username,
         email: req.body.email,
         shortDescription: req.body.shortDescription,
         fullDescription: req.body.fullDescription,
         paymentInfo: req.body.paymentInfo,
-        // publisherAgreement: req.body.publisherAgreement
     })
     res.json(user)
 }
@@ -86,7 +87,6 @@ async function addSubscription(req, res) {
             { subscriptions: 
                 [{publisherId: req.body.pubId}] }}
     )
-    console.log(user)
     res.json(user)
 }
 

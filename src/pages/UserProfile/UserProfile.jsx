@@ -1,12 +1,9 @@
-import { Link } from "react-router-dom";
-import Navbar from '../../components/Navbar/Navbar';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react"
 import {useParams} from 'react-router'
 
 
 export default function UserProfile(props) {
-    
-    
+
     const { userId } = useParams()
 
     let getProfile = async () => {

@@ -3,7 +3,6 @@ import { useParams } from 'react-router'
 import { Link, redirect } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import './EditProfile.css'
-// import { useNavigation}
 
 
 export default function EditProfile(props) {
@@ -16,23 +15,48 @@ export default function EditProfile(props) {
         setUser({...user, [e.target.name]: e.target.value})
     }
 
+    let handleFileChange = (e) => {
+        setUser({...user, profilePic: e.target.files[0]})
+    }
+
     let handleSubmit = async (e) => {
-        e.preventDefault()
-        let body = {
-            _id: user._id,
-            email: user.email,
-            username: user.username,
-            shortDescription: user.shortDescription,
-            fullDescription: user.fullDescription,
-            paymentInfo: user.paymentInfo,
-            publisherAgreement: user.publisherAgreement
-        }
+      console.log('user: ' + JSON.stringify(user))
+        // e.preventDefault()
+        // let body = {
+        //     _id: user._id,
+        //     email: user.email,
+        //     username: user.username,
+        //     shortDescription: user.shortDescription,
+        //     fullDescription: user.fullDescription,
+        //     paymentInfo: user.paymentInfo,
+        //     publisherAgreement: user.publisherAgreement
+        // }
+        // let options = {
+        //     method: 'PUT',
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(body)
+        // }
+        
+        // await fetch('/api/users/editProfile', options)
+        //     .then(res => res.json())
+        //     .then(data => props.setUserInState(data))
+        //     .then(navigate(`/users/getProfile/${user._id}`))
+        let profilePic = user.profilePic
+        const formdata = new FormData()
+
+        formdata.append('_id', user._id)
+        formdata.append('profilePic', profilePic)
+        formdata.append('username', user.username)
+        formdata.append('email', user.email)
+        formdata.append('shortDescription', user.shortDescription)
+        formdata.append('fullDescription', user.fullDescription)
+        formdata.append('paymentInfo', user.paymentInfo)
+
         let options = {
             method: 'PUT',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
+            body: formdata
         }
         
         await fetch('/api/users/editProfile', options)
@@ -56,11 +80,15 @@ export default function EditProfile(props) {
 
     
     return (
-      <form className='editProfileForm' onSubmit={handleSubmit}>
+      <form className='editProfileForm' encType='multipart/form-data' onSubmit={handleSubmit}>
         <input type='hidden' value={user._id}></input>
-        <input type='hidden' value={user.publisherAgreement}></input>
         <div>
           <h4>Edit Profile</h4>
+          <img className='editProfilePic' src={user.profilePic}></img>
+          <div className="form-group address-update">
+            <label className="inputUD"><span className="label"><b>Change Profile Picture</b></span></label>
+            <input type="file" accept='.png, .jpg, .jpeg' className="form-control" name="profilePic" onChange={handleFileChange}></input>
+          </div>
           <div className="form-group address-update">
             <label className="inputUD"><span className="label"><b>Username</b></span></label>
             <input type="text" className="form-control" name="username" onChange={handleChange} value={user.username}></input>
