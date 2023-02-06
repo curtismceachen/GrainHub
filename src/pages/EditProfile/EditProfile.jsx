@@ -20,29 +20,6 @@ export default function EditProfile(props) {
     }
 
     let handleSubmit = async (e) => {
-      console.log('user: ' + JSON.stringify(user))
-        // e.preventDefault()
-        // let body = {
-        //     _id: user._id,
-        //     email: user.email,
-        //     username: user.username,
-        //     shortDescription: user.shortDescription,
-        //     fullDescription: user.fullDescription,
-        //     paymentInfo: user.paymentInfo,
-        //     publisherAgreement: user.publisherAgreement
-        // }
-        // let options = {
-        //     method: 'PUT',
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(body)
-        // }
-        
-        // await fetch('/api/users/editProfile', options)
-        //     .then(res => res.json())
-        //     .then(data => props.setUserInState(data))
-        //     .then(navigate(`/users/getProfile/${user._id}`))
         let profilePic = user.profilePic
         const formdata = new FormData()
 

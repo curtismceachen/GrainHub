@@ -38,7 +38,7 @@ export default function Navbar(props) {
               :
               props.user &&
                 <div className="theme-font">
-                  <Link to='/publishers/becomePublisher' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                  <Link to={`/publishers/becomePublisher/${props.user._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                     Become A Publisher
                   </Link>
                 </div>

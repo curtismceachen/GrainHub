@@ -58,7 +58,7 @@ export default class App extends Component {
           <Route path='/ideas/create' element={<NewIdea user={this.state.user} setUserInState={this.setUserInState}/>}/>
           <Route path='/users/getProfile/:userId' element={<UserProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
           <Route path='/users/editProfile/:userId' element={<EditProfile user={this.state.user} setUserInState={this.setUserInState}/>}/>
-          <Route path='/publishers/becomePublisher' element={<BecomePublisher user={this.state.user} setUserInState={this.setUserInState}/>} />
+          <Route path='/publishers/becomePublisher/:userId' element={<BecomePublisher user={this.state.user} setUserInState={this.setUserInState}/>} />
           <Route path='/users/addSubscription'/>
           <Route path='/users/removeSubscription'/>
           <Route path='/publishers/show/:id' element={<PubProfile user={this.state.user}/>}/>

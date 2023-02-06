@@ -1,38 +1,34 @@
 import { Component } from 'react'
 import React from 'react'
+import { useParams } from 'react-router'
+import {useEffect, useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './BecomePublisher.css'
 
 
-export default class BecomePublisher extends Component {
-    
-    state = {
-        _id: '',
-        email: '',
-        username: '',
-        shortDescription: '',
-        fullDescription: '',
-        paymentInfo: '',
-        publisherAgreement: false,
+export default function BecomePublisher(props) {
+
+    const [user, setUser] = useState({})
+    const { userId } = useParams()
+    const navigate = useNavigate()
+
+    let handleChange = (e) => {
+        setUser({...user, [e.target.name]: e.target.value})
     }
 
-    handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
-    }
-
-    handleCBChange = (e) => {
-        this.setState({publisherAgreement:!this.state.publisherAgreement})
+    let handleCBChange = (e) => {
+        setUser({...user, publisherAgreement: !user.publisherAgreement})
     }
     
-    handleSubmit = async () => {
+    let handleSubmit = async () => {
         let body = {
-            _id: this.state._id,
-            email: this.state.email,
-            username: this.state.username,
-            shortDescription: this.state.shortDescription,
-            fullDescription: this.state.fullDescription,
-            paymentInfo: this.state.paymentInfo,
-            publisherAgreement: this.state.publisherAgreement
+            _id: user._id,
+            email: user.email,
+            username: user.username,
+            shortDescription: user.shortDescription,
+            fullDescription: user.fullDescription,
+            paymentInfo: user.paymentInfo,
+            publisherAgreement: user.publisherAgreement
         }
         let options = {
             method: 'PUT',
@@ -43,55 +39,50 @@ export default class BecomePublisher extends Component {
         }
         await fetch('/api/publishers/becomePublisher', options)
             .then(res => res.json())
-            .then(data => {
-                this.props.setUserInState(data)
-            })
-            // .then(navigate('/discover/:id'))
+            .then(data => props.setUserInState(data))
+            .then(navigate(`/discover/${user._id}`))
     }
 
-    componentDidMount() {
-        this.setState({
-            _id: this.props.user._id,
-            email: this.props.user.email,
-            username: this.props.user.username,
-            shortDescription: this.props.user.shortDescription,
-            fullDescription: this.props.fullDescription,
-            paymentInfo: this.props.user.paymentInfo,
-            publisherAgreement: this.props.user.publisherAgreement
-        })
+    let getProfile = async () => {
+      await fetch(`/api/users/getProfile/${userId}`)
+          .then(res => res.json())
+          .then(data => setUser(data))
     }
 
+    useEffect(() => {
+        (async () => {
+            setUser(props.user)
+            await getProfile()
+        })()
+    }, [props.user])
 
-    render() {
-        return (
-          <form className='becomePublisherForm' onSubmit={this.handleSubmit}>
-            <input type='hidden' value={this.state._id}></input>
-            <input type='hidden' value={this.state.email}></input>
-            <div>
-              <h4>Become A Publisher</h4>
-              <h6>{this.props.user.username}</h6>
-              <div className="form-group">
-                <label className="inputUD"><span className="label"><b>Short Description</b></span></label>
-                <textarea type="text" className="form-control" name="shortDescription" onChange={this.handleChange}></textarea>
-              </div>
-              <div className="form-group">
-                <label className="inputUD"><span className="label"><b>Full Description</b></span></label>
-                {/* this textarea to be replaced later with a text editor */}
-                <textarea type="text" className="form-control" name="fullDescription" onChange={this.handleChange}></textarea>
-              </div>
-              <div className="form-group address-update">
-                <label className="inputUD"><span className="label"><b>Fake Payment Info</b></span></label>
-                <input type="text" className="form-control" name="paymentInfo" onChange={this.handleChange}></input>
-              </div>
-              <div className="form-group address-update">
-                <label className="inputUD"><span className="label"><b>Fake Publisher Agreement</b></span></label>
-                <input type="checkbox" name="publisherAgreement" required onClick={this.handleCBChange}></input>
-              *</div>
-              {/* <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}> */}
-                <input type="submit" className="btn btn-success"></input>
-              {/* </Link> */}
-            </div>
-          </form>
-        )
-    }
+
+    return (
+      <form className='becomePublisherForm' onSubmit={handleSubmit}>
+        <input type='hidden' value={user._id}></input>
+        <input type='hidden' value={user.email}></input>
+        <div>
+          <h4>Become A Publisher</h4>
+          <h6>{user.username}</h6>
+          <div className="form-group">
+            <label className="inputUD"><span className="label"><b>Short Description</b></span></label>
+            <textarea type="text" className="form-control" name="shortDescription" onChange={handleChange}></textarea>
+          </div>
+          <div className="form-group">
+            <label className="inputUD"><span className="label"><b>Full Description</b></span></label>
+            {/* this textarea to be replaced later with a text editor */}
+            <textarea type="text" className="form-control" name="fullDescription" onChange={handleChange}></textarea>
+          </div>
+          <div className="form-group address-update">
+            <label className="inputUD"><span className="label"><b>Fake Payment Info</b></span></label>
+            <input type="text" className="form-control" name="paymentInfo" onChange={handleChange}></input>
+          </div>
+          <div className="form-group address-update">
+            <label className="inputUD"><span className="label"><b>Fake Publisher Agreement</b></span></label>
+            <input type="checkbox" name="publisherAgreement" required onClick={handleCBChange}></input>
+          *</div>
+          <input type="submit" className="btn btn-success"></input>
+        </div>
+      </form>
+    )
 }
