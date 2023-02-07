@@ -64,8 +64,8 @@ export default class App extends Component {
           <Route path='/publishers/show/:id' element={<PubProfile user={this.state.user}/>}/>
           <Route path='/ideas/show/:id' element={<PubIdeas user={this.state.user}/>}/>
           <Route path='/ideas/ideasFeed/:userId' element={<IdeasFeed user={this.state.user}/>}/>
-          <Route path='/discover/:id' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>}/>
-          <Route path='*' element={<Navigate to='/discover/:id' replace />}/>
+          <Route path='/discover/:userId' element={<Discover user={this.state.user} setUserInState={this.setUserInState}/>}/>
+          <Route path='*' element={<Navigate to='/discover/:userId' replace />}/>
         </Routes>
       </div>
     )
