@@ -51,6 +51,7 @@ export default function Discover (props) {
                 {publishers.map((p) => (
                   <div className="card card-spacing">
                     <div className="card-body">
+                    <img className='navProfilePic' src={p.profilePic}></img>
                       <Link to={`/publishers/show/${p._id}`} style={{ color: 'inherit', textDecoration: 'inherit' }}>
                         <h5 className="card-title"><b>{p.username}</b></h5>
                       </Link>
