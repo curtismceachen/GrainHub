@@ -57,21 +57,22 @@ const s3 = new aws.S3({
 })
 
 async function editProfile(req, res) {
-    console.log('editProfile ctrler')
-    console.log(req.file)
-    function uploadFile(file) {
-        const fileStream = fs.createReadStream(file.path)
-        const uploadParams = {
-            Bucket: 'investing-ideas-bucket',
-            Body: fileStream,
-            Key: file.filename
+    let imageLink = ''
+    if(req.file){
+        function uploadFile(file) {
+            const fileStream = fs.createReadStream(file.path)
+            const uploadParams = {
+                Bucket: 'investing-ideas-bucket',
+                Body: fileStream,
+                Key: file.filename
+            }
+            return s3.upload(uploadParams).promise()
         }
-        return s3.upload(uploadParams).promise()
+        let result = await uploadFile(req.file)
+        imageLink = result.Location
     }
-    const result = await uploadFile(req.file)
-    console.log(req.body._id)
     let user = await User.findByIdAndUpdate(req.body._id, {
-        profilePic: result.Location,
+        profilePic: imageLink,
         username: req.body.username,
         email: req.body.email,
         shortDescription: req.body.shortDescription,

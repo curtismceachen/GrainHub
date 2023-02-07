@@ -35,11 +35,11 @@ export default function EditProfile(props) {
             method: 'PUT',
             body: formdata
         }
-        
+
         await fetch('/api/users/editProfile', options)
             .then(res => res.json())
             .then(data => props.setUserInState(data))
-            .then(navigate(`/users/getProfile/${user._id}`))
+            .then(navigate(`/users/getProfile/${user._id}`))    
     }
 
     let getProfile = async () => {
