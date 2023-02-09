@@ -49,7 +49,22 @@ async function create(req, res) {
 
 async function show(req, res) {
     let ideas = await Idea.find({ 'user': req.params.id})
-    res.json(ideas)
+    let publisher = await User.findById(req.params.id)
+    let ideasWithPubUsername = ideas.map(idea => {
+        return {
+            id: idea._id,
+            title: idea.title,
+            thesis: idea.thesis,
+            ticker: idea.ticker,
+            longOrShort: idea.longOrShort,
+            publisher: {
+                id: idea.user,
+                username: publisher.username,
+                profilePic: publisher.profilePic
+            }
+        }
+    })
+    res.json(ideasWithPubUsername)
 }
 
 async function ideasFeed(req, res) {
