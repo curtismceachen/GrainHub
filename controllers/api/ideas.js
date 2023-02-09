@@ -68,7 +68,8 @@ async function ideasFeed(req, res) {
             longOrShort: idea.longOrShort,
             publisher: {
                 id: idea.user,
-                username: publisher.username
+                username: publisher.username,
+                profilePic: publisher.profilePic
             }
         }
     })
