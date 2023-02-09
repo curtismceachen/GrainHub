@@ -8,48 +8,35 @@ body{
     font-family:'helvetica';    
 }
 
-/*-- Bootstrap Override Style --*/
-
-
-/*-- Content Style --*/
-.post-footer-option li{
-    float:left;
-    margin-right:50px;
-    padding-bottom:15px;
+.ideaPanelUsername{
+    display: inline-block;
+    margin: 0 0 27px 5px;
+    font-weight: bold;
 }
 
 .ideaPanelTitle{
     margin: 10px 0 0 0px;
 }
 
-.ideaPanelTicker{
-     /* float: left; */
-    /* font-size: 15px; */
-}
-
 .ideaPanelSubheading{
-    /* margin-top: -10;
-    padding:0; */
     font-size: 14px;
     float: left;
 }
 
-.bullishImg{
+.longOrShortImg{
     width: 14px;
     margin: 0 0 8px 2px;
 }
 
-.panelPadding{
+.ideaPanelMargin{
     margin: 15px;
 }
 
-.post-footer-option li a{
-    color:#AFB4BD;
-    font-weight:500;
-    font-size:1.3rem;
+.ideaPanelProfilePic{
+    float: left;
 }
 
-.photo-profile{
+.profilePic{
     cursor: pointer;
     background-size: cover;
     object-fit: contain;
@@ -61,15 +48,7 @@ body{
     border:1px solid #DDD; 
 }
 
-.anchor-username h4{
-    font-weight:bold;    
-}
-
-.anchor-time{
+/* .anchor-time{
     color:#ADB2BB;
     font-size:1.2rem;
-}
-
-.post-footer-comment-wrapper{
-    background-color:#F6F7F8;
-}
+} */
