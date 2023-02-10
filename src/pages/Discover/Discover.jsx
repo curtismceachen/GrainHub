@@ -38,7 +38,6 @@ export default function Discover (props) {
             await getPublishers()
         })()
     },[])
-    
 
     
     return (

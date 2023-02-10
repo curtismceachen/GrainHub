@@ -10,6 +10,7 @@ export default class NewSpot extends Component {
         title: '',
         thesis: null,
         ticker: '',
+        stockPrice: '',
         longOrShort: '',
     }
     
@@ -22,11 +23,28 @@ export default class NewSpot extends Component {
         this.setState({[e.target.name]: e.target.value })
     }
 
+    handleTickerChange = async (e) => {
+        this.setState({ticker: e.target.value})
+
+        let API_KEY = process.env.REACT_APP_MARKETSTACK_ACCESS_KEY
+          let stockTicker = e.target.value
+          let URL = `http://api.marketstack.com/v1/intraday?access_key=${API_KEY}&symbols=${stockTicker}`
+        
+        let stockPrice = ''
+        if (stockTicker !== '') {
+          let response = await fetch(URL)
+            let data = await response.json()
+            stockPrice = data.data[0].last
+        }
+        this.setState({stockPrice: stockPrice})
+    }
+
     handleSubmit = async () => {
         let body = {
             title: this.state.title,
             thesis: this.state.thesis,
-            ticker: this.state.ticker,
+            ticker: this.state.ticker.toUpperCase(),
+            stockPrice: this.state.stockPrice,
             longOrShort: this.state.longOrShort,
             user: this.props.user
         }
@@ -38,7 +56,7 @@ export default class NewSpot extends Component {
             },
             body: JSON.stringify(body)
         }
-        
+
         await fetch("/api/ideas/create", options)
             .then(res => res.json())
             .then(() =>
@@ -46,13 +64,13 @@ export default class NewSpot extends Component {
                     title: '',
                     thesis: null,
                     ticker: '',
+                    stockPrice: '',
                     longOrShort: '',
                 })
-            )
-            
+            )     
     }
 
-
+  
     render() {
         return (
           <main>
@@ -79,23 +97,9 @@ export default class NewSpot extends Component {
                             image_title: true,
                             image_uploadtab: true,
                             plugins: [
-                              "advlist",   
-                              "autolink",
-                              "lists",
-                              "link",
-                              "image",
-                              "charmap",
-                              "anchor",
-                              "searchreplace",
-                              "visualblocks",
-                              "code",
-                              "fullscreen",
-                              "insertdatetime",
-                              "media",
-                              "table",
-                              "preview",
-                              "help",
-                              "wordcount",
+                              "advlist", "autolink", "lists", "link", "image", "charmap",
+                              "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+                              "insertdatetime", "media", "table", "preview", "help", "wordcount",
                             ],
                             toolbar: "undo redo | blocks | " +
                               "bold italic forecolor | alignleft aligncenter " +
@@ -108,8 +112,9 @@ export default class NewSpot extends Component {
                         />
                       </div>
                       <div className="form-group secondary-font ticker">
-                        <label className="input"><b>Ticker Symbol</b></label>
-                        <input type="text" className="form-control" name="ticker" placeholder="Ticker Symbol" onChange={this.handleChange} value={this.address}></input>
+                        <label className="input"><b>Ticker Symbol </b></label>
+                        <input type="text" className="form-control" name="ticker" placeholder="Ticker Symbol" onChange={this.handleTickerChange} value={this.address}></input>
+                        {this.state.stockPrice && <label>{this.state.ticker.toUpperCase()} <b>{this.state.stockPrice}</b> USD</label>}
                       </div>
                       <div className="form-group secondary-font">
                         <label className="input"><b>Long or Short</b></label>

@@ -10,7 +10,7 @@ export default function Navbar(props) {
     const [sidebar, setAuthSidebar] = useState(false)
 
     const showAuthSidebar = () => setAuthSidebar(!sidebar)
-    const profilePic = props.user.profilePic
+    // const profilePic = props.user.profilePic
     
     return (
       <main>
