@@ -33,7 +33,7 @@ export default function IdeasFeed (props) {
     },[])
     
     let sanitizeData = (data) => ({
-      __html: DOMPurify.sanitize(data)
+        __html: DOMPurify.sanitize(data)
     })
     
 
@@ -63,6 +63,7 @@ export default function IdeasFeed (props) {
                     {i.longOrShort && <div className="ideaPanelSubheading">{i.longOrShort}</div>}
                     {i.longOrShort === 'Long' && <img className='longOrShortImg' src={bullish}></img>}
                     {i.longOrShort === 'Short' && <img className='longOrShortImg' src={bearish}></img>}
+                    {i.stockPrice && <div>{i.stockPrice} USD</div>}
                     <div dangerouslySetInnerHTML={sanitizeData(i.thesis)}></div>
                   </section>
                 </div>

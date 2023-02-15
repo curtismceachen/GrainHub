@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import { Link, redirect } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import './EditProfile.css'
+import { Editor } from '@tinymce/tinymce-react'
 
 
 export default function EditProfile(props) {
@@ -17,6 +18,10 @@ export default function EditProfile(props) {
 
     let handleFileChange = (e) => {
         setUser({...user, profilePic: e.target.files[0]})
+    }
+    
+    let handleEditorChange = (fullDescription) => {
+        setUser({...user, fullDescription})
     }
 
     let handleSubmit = async (e) => {
@@ -90,9 +95,7 @@ export default function EditProfile(props) {
               </div>
             </div>
           }
-          {/* <Link to='/'> */}
-            <button type="submit" className="btn btn-success">Submit</button>
-          {/* </Link> */}
+          <button type="submit" className="btn btn-success">Submit</button>
         </div>
       </form>
     )

@@ -4,6 +4,7 @@ import { useParams } from 'react-router'
 import {useEffect, useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './BecomePublisher.css'
+import { Editor } from '@tinymce/tinymce-react'
 
 
 export default function BecomePublisher(props) {
@@ -14,6 +15,10 @@ export default function BecomePublisher(props) {
 
     let handleChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
+    }
+
+    let handleEditorChange = (fullDescription) => {
+        setUser({...user, fullDescription: fullDescription})
     }
 
     let handleCBChange = (e) => {
@@ -71,7 +76,31 @@ export default function BecomePublisher(props) {
           <div className="form-group">
             <label className="inputUD"><span className="label"><b>Full Description</b></span></label>
             {/* this textarea to be replaced later with a text editor */}
-            <textarea type="text" className="form-control" name="fullDescription" onChange={handleChange}></textarea>
+            <Editor
+              thesis={user.fullDescription} 
+              onEditorChange={handleEditorChange}
+              initialValue='<p>Write your full bio...</p>'
+              init={{
+                statubar: true,
+                height: 500,
+                image_caption: true,
+                image_title: true,
+                image_uploadtab: true,
+                plugins: [
+                  "advlist", "autolink", "lists", "link", "image", "charmap",
+                  "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+                  "insertdatetime", "media", "table", "preview", "help", "wordcount",
+                ],
+                toolbar: "undo redo | blocks | " +
+                  "bold italic forecolor | alignleft aligncenter " +
+                  "alignright alignjustify | bullist numlist outdent indent | " +
+                  "removeformat | help",
+                images_upload_url: '/api/ideas/uploadImage',
+                image_title: true,
+                automatic_uploads: true,
+              }}
+            />
+            {/* <textarea type="text" className="form-control" name="fullDescription" onChange={handleChange}></textarea> */}
           </div>
           <div className="form-group address-update">
             <label className="inputUD"><span className="label"><b>Fake Payment Info</b></span></label>

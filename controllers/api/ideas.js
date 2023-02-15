@@ -74,12 +74,13 @@ async function ideasFeed(req, res) {
     let allPublishersIdeas = await Idea.find({'user': { $in: subscriptionIds }})
     let ideasWithPubUsername = allPublishersIdeas.map(idea => {
         let publisher = publishers.find(s => String(s._id) == String(idea.user))
-        if (!publisher) return null 
+        if (!publisher) return null
         return {
             id: idea._id,
             title: idea.title,
             thesis: idea.thesis,
             ticker: idea.ticker,
+            stockPrice: idea.stockPrice,
             longOrShort: idea.longOrShort,
             publisher: {
                 id: idea.user,

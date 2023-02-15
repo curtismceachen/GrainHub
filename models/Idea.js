@@ -14,6 +14,9 @@ const ideaSchema = new Schema({
     ticker: {
         type: String,
     },
+    stockPrice: {
+        type: String,
+    },
     longOrShort: {
         type: String,
     },

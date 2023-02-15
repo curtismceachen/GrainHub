@@ -57,8 +57,12 @@ const s3 = new aws.S3({
 })
 
 async function editProfile(req, res) {
+    // imageLink must be initialized for query $cond below
     let imageLink = ''
+    // if user submitted a profile pic then upload it
+    // to AWS bucket
     if(req.file){
+        console.log(req.file)
         function uploadFile(file) {
             const fileStream = fs.createReadStream(file.path)
             const uploadParams = {
@@ -70,20 +74,34 @@ async function editProfile(req, res) {
         }
         let result = await uploadFile(req.file)
         imageLink = result.Location
+        // delete the image from the uploads folder
+        fs.unlink(req.file.path, async function (err) {
+            if (err)
+                return res.status(400).json({ success: false, message: err.message })
+        })
     }
-    let user = await User.findByIdAndUpdate(req.body._id, {
-        profilePic: imageLink,
+
+    const update = {
         username: req.body.username,
         email: req.body.email,
         shortDescription: req.body.shortDescription,
         fullDescription: req.body.fullDescription,
         paymentInfo: req.body.paymentInfo,
-    })
+    }
+    // if user submitted a profile pic then add it to the update object
+    if (req.file) {
+        update.profilePic = imageLink
+    }
+
+    let user = await User.findByIdAndUpdate(req.body._id, update)
+    
     res.json(user)
 }
 
 async function addSubscription(req, res) {
     let user = await User.findByIdAndUpdate(req.body.userId,
+        // addToSet adds the value to the array unless the value is already present
+        // I.O.W. it wont add them to subscriptions if they're already subscribed
         { $addToSet: 
             { subscriptions: 
                 [{publisherId: req.body.pubId}] }}
