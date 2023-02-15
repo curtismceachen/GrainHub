@@ -10,6 +10,8 @@ router.post('/signup', usersCtrl.signup)
 router.post('/login', usersCtrl.login)
 
 router.get('/getProfile/:userId', usersCtrl.getProfile)
+
+router.post('/uploadFullDescripImage', upload.single('file'), usersCtrl.uploadFullDescripImage)
 // edit
 router.put('/editProfile', upload.single('profilePic'), usersCtrl.editProfile)
 

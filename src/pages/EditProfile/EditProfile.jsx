@@ -44,7 +44,7 @@ export default function EditProfile(props) {
         await fetch('/api/users/editProfile', options)
             .then(res => res.json())
             .then(data => props.setUserInState(data))
-            .then(navigate(`/users/getProfile/${user._id}`))    
+            .then(navigate(`/publishers/show/${user._id}`))  
     }
 
     let getProfile = async () => {
@@ -60,7 +60,7 @@ export default function EditProfile(props) {
         })()
     },[props.user])
 
-    
+   
     return (
       <form className='editProfileForm' encType='multipart/form-data' onSubmit={handleSubmit}>
         <input type='hidden' value={user._id}></input>
@@ -87,7 +87,30 @@ export default function EditProfile(props) {
               </div>
               <div className="form-group">
                 <label className="inputUD"><span className="label"><b>Full Description</b></span></label>
-                <textarea type="text" className="form-control" name="fullDescription" onChange={handleChange} value={user.fullDescription}></textarea>
+                <Editor
+                  fullDescription={user.fullDescription} 
+                  onEditorChange={handleEditorChange}
+                  value={user.fullDescription}
+                  init={{
+                    statubar: true,
+                    height: 500,
+                    image_caption: true,
+                    image_title: true,
+                    image_uploadtab: true,
+                    plugins: [
+                      "advlist", "autolink", "lists", "link", "image", "charmap",
+                      "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+                      "insertdatetime", "media", "table", "preview", "help", "wordcount",
+                    ],
+                    toolbar: "undo redo | blocks | " +
+                      "bold italic forecolor | alignleft aligncenter " +
+                      "alignright alignjustify | bullist numlist outdent indent | " +
+                      "removeformat | help",
+                    images_upload_url: '/api/users/uploadFullDescripImage',
+                    image_title: true,
+                    automatic_uploads: true,
+                  }}
+                />
               </div>
               <div className="form-group address-update">
                 <label className="inputUD"><span className="label"><b>Fake Payment Info</b></span></label>

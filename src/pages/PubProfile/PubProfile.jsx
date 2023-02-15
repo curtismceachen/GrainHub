@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import React, {useEffect, useState} from "react";
 import {useParams} from 'react-router'
 import './PubProfile.css';
+import DOMPurify from "dompurify";
 
 
 export default function PubProfile(props) {
@@ -21,6 +22,10 @@ export default function PubProfile(props) {
             await getPubProfile()
         })()
     }, [])
+
+    let sanitizeData = (data) => ({
+        __html: DOMPurify.sanitize(data)
+    })
     
     
     return (
@@ -42,7 +47,7 @@ export default function PubProfile(props) {
                   <div className="card-body">
                     <h5 className="card-title"><b>{publisher.username}</b></h5>
                     <div className="card-subtitle">Deep value, special situations</div>
-                    <div className="card-text"> {publisher.fullDescription}</div>
+                    <div dangerouslySetInnerHTML={sanitizeData(publisher.fullDescription)}></div>
                   </div>
                 </div>
               </div>
