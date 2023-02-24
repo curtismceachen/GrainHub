@@ -20,7 +20,9 @@ export default class NewSpot extends Component {
     }
 
     handleChange = (e) => {
+        console.log(e.target.name)
         this.setState({[e.target.name]: e.target.value })
+        console.log('longOrShort: ', this.state.longOrShort)
     }
 
     handleTickerChange = async (e) => {
@@ -34,9 +36,16 @@ export default class NewSpot extends Component {
         if (stockTicker !== '') {
           let response = await fetch(URL)
             let data = await response.json()
-            stockPrice = data.data[0].last
+            let priceHistory = data.data
+            // The 'last' price value is often null, so we'll grab the most
+            // recent one thats not.
+            stockPrice = priceHistory.find(price => {
+                return price.last !== null
+            })
         }
-        this.setState({stockPrice: stockPrice})
+        // stockPrice = full object, we only want the stockPrice.last value.
+        console.log('stockPrice: ' + stockPrice.last + ' ticker: ' + stockTicker)
+        this.setState({stockPrice: stockPrice.last})
     }
 
     handleSubmit = async () => {
@@ -82,7 +91,7 @@ export default class NewSpot extends Component {
                       <h3 className="title theme-font">Post An Idea</h3>
                       <div className="form-group secondary-font title">
                         <label className="input"><b>Title</b></label>
-                        <input type="text" className="form-control" name="title" placeholder="Title" required onChange={this.handleChange} value={this.name}></input>
+                        <input type="text" className="form-control" name="title" placeholder="Title" required onChange={this.handleChange} value={this.state.title}></input>
                       </div>
                       <div className="form-group secondary-font thesis">
                         <label className="input"><b>Thesis</b></label>
@@ -113,15 +122,15 @@ export default class NewSpot extends Component {
                       </div>
                       <div className="form-group secondary-font ticker">
                         <label className="input"><b>Ticker Symbol </b></label>
-                        <input type="text" className="form-control" name="ticker" placeholder="Ticker Symbol" onChange={this.handleTickerChange} value={this.address}></input>
+                        <input type="text" className="form-control" name="ticker" placeholder="Ticker Symbol" onChange={this.handleTickerChange} value={this.state.ticker}></input>
                         {this.state.stockPrice && <label>{this.state.ticker.toUpperCase()} <b>{this.state.stockPrice}</b> USD</label>}
                       </div>
                       <div className="form-group secondary-font">
                         <label className="input"><b>Long or Short</b></label>
                         <select className="form-control" name="longOrShort" placeholder="Long/Short" onChange={this.handleChange}>
-                          <option value={this.longOrShort}></option>
-                          <option value={this.longOrShort}>Long</option>
-                          <option value={this.longOrShort}>Short</option>
+                          <option value=""></option>
+                          <option value="Long">Long</option>
+                          <option value="Short">Short</option>
                         </select>
                       </div>
                       <input hidden name='user'>{this.props.user.id}</input>

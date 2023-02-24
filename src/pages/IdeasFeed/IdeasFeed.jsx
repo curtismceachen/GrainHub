@@ -56,13 +56,16 @@ export default function IdeasFeed (props) {
                   <section className="">
                     <h5 className="ideaPanelTitle">{i.title}</h5>
                     {i.ticker && <div className="ideaPanelSubheading">{i.ticker}
-                      <svg xmlns="http://www.w3.org/2000/svg" className='' width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
-                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                      </svg>
+                      {i.longOrShort &&
+                        <svg xmlns="http://www.w3.org/2000/svg" className='' width="16" height="16" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+                          <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                        </svg>
+                      }
                     </div>}
                     {i.longOrShort && <div className="ideaPanelSubheading">{i.longOrShort}</div>}
                     {i.longOrShort === 'Long' && <img className='longOrShortImg' src={bullish}></img>}
                     {i.longOrShort === 'Short' && <img className='longOrShortImg' src={bearish}></img>}
+                    <br/>
                     {i.stockPrice && <div>{i.stockPrice} USD</div>}
                     <div dangerouslySetInnerHTML={sanitizeData(i.thesis)}></div>
                   </section>

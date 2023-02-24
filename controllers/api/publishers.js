@@ -1,3 +1,4 @@
+const Idea = require('../../models/Idea')
 const User = require('../../models/User')
 
 
